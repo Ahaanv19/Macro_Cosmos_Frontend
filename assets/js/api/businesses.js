@@ -16,110 +16,32 @@ const SPOTLIGHT_STORAGE_KEY = 'sd_auto_spotlighted_businesses';
 export const defaultBusinesses = [
   {
     id: 1,
-    name: 'ActiveMed Integrative Health Center',
-    description: 'Integrative healthcare clinic offering acupuncture, massage therapy, functional medicine, physical therapy, and axon therapy.',
-    address: '6719 Alvarado Rd Ste 304, San Diego, CA 92120',
-    website: 'https://activemedhealth.com/',
-    category: 'Healthcare',
-    neighborhood: 'College Area',
-    highlights: ['Acupuncture', 'Functional medicine', 'Physical therapy'],
-    review: {
-      metric: 'Published patient feedback on the official site',
-      source: 'activemedhealth.com testimonials and review feed',
-      summary: 'Published patient feedback repeatedly calls out attentive staff, clear treatment guidance, and meaningful relief during recovery.',
-    },
-    isSpotlighted: false,
+    name: "ActiveMed Integrative Health Center",
+    description: "We believe in a collaborative approach to healthcare. We offer acupuncture, massage therapy, functional medicine, physical therapy, and axon therapy.",
+    address: "11588 Via Rancho San Diego, Suite 101, El Cajon, CA 92019",
+    website: "https://activemedhealth.com/",
+    image: "bus.png",
+    category: "Healthcare",
+    coordinates: { lat: 32.7914, lng: -116.9259 },
+    isSpotlighted: false
   },
   {
     id: 2,
-    name: 'Digital One Printing',
-    description: 'Poway printshop offering digital, offset, large-format, signage, trade show graphics, bindery, and promotional products.',
-    address: '12630 Poway Rd, Poway, CA 92064',
-    website: 'https://d1printing.net/',
-    category: 'Printing Services',
-    neighborhood: 'Poway',
-    highlights: ['Large format', 'Trade show graphics', 'Promo products'],
-    review: null,
-    isSpotlighted: false,
-  },
-  {
-    id: 3,
-    name: 'Verbatim Books',
-    description: 'Independent North Park bookstore with more than 50,000 used and antiquarian titles, local zines, and regular community events.',
-    address: '3793 30th Street, San Diego, CA 92104',
-    website: 'https://www.verbatimbooks.com/',
-    category: 'Bookstore',
-    neighborhood: 'North Park',
-    highlights: ['50,000+ titles', 'Local zines', 'Book crawl events'],
-    review: {
-      metric: '300+ public Yelp reviews surfaced in search',
-      source: 'Public review listings',
-      summary: 'Public review snippets frequently mention the deep secondhand selection, fair prices, and a browse-friendly atmosphere.',
-    },
-    isSpotlighted: false,
-  },
-  {
-    id: 4,
-    name: 'Communal Coffee',
-    description: 'Creative-minded cafe and shop serving craft coffee, seasonal food, fresh floral arrangements, and curated goods across San Diego locations.',
-    address: '2335 University Ave, San Diego, CA 92104',
-    website: 'https://www.communalcoffee.com/',
-    category: 'Cafe',
-    neighborhood: 'North Park',
-    highlights: ['Craft coffee', 'Seasonal menu', 'Floral design'],
-    review: {
-      metric: '4.6/5 on Tripadvisor in public search results',
-      source: 'Public review listings',
-      summary: 'Public review snippets consistently point to the floral interiors, strong drinks, and an easy meet-up atmosphere.',
-    },
-    isSpotlighted: false,
-  },
-  {
-    id: 5,
-    name: 'Liberty Public Market',
-    description: 'Seven-day Liberty Station market bringing together local food, drink, retail, and artisan vendors under one roof.',
-    address: '2820 Historic Decatur Rd, San Diego, CA 92106',
-    website: 'https://libertypublicmarketsd.com/',
-    category: 'Market',
-    neighborhood: 'Liberty Station',
-    highlights: ['40+ vendors', 'Prepared foods', 'Local goods'],
-    review: {
-      metric: '700+ public review signals surfaced in search',
-      source: 'Public review listings and travel guides',
-      summary: 'Review listings highlight the vendor variety, group-friendly layout, and easy all-day browsing in Liberty Station.',
-    },
-    isSpotlighted: false,
-  },
-];
-
-const curatedBusinessesById = new Map(defaultBusinesses.map((business) => [business.id, business]));
-
-function mergeBusinesses(apiBusinesses = []) {
-  const mergedBusinesses = new Map(defaultBusinesses.map((business) => [business.id, { ...business }]));
-
-  for (const apiBusiness of apiBusinesses) {
-    const curatedBusiness = apiBusiness.id
-      ? curatedBusinessesById.get(apiBusiness.id)
-      : defaultBusinesses.find((business) => business.name === apiBusiness.name || business.website === apiBusiness.website);
-
-    const mergedBusiness = {
-      ...(curatedBusiness ?? {}),
-      ...apiBusiness,
-      neighborhood: apiBusiness.neighborhood ?? curatedBusiness?.neighborhood,
-      highlights: apiBusiness.highlights ?? curatedBusiness?.highlights ?? [],
-      review: apiBusiness.review ?? curatedBusiness?.review ?? null,
-    };
-
-    const businessKey = mergedBusiness.id ?? mergedBusiness.name;
-    mergedBusinesses.set(businessKey, mergedBusiness);
+    name: "Digital One Printing",
+    description: "Digital One Printing is your premier one-stop Poway printshop that offers a wide range of services, has many years of experience and a tremendous reputation. Digital, Offset, Large Format, Posters, Banners, Trade show graphics, Signs, Promotional Products, Bindery and more.",
+    address: "12630 Poway Rd, Poway, CA 92064",
+    website: "https://d1printing.net/",
+    image: "Screenshot 2025-07-23 at 8.34.48 AM.png",
+    imageLayout: "wide",
+    category: "Printing Services",
+    coordinates: { lat: 32.9579, lng: -117.0287 },
+    isSpotlighted: false
   }
-
-  return Array.from(mergedBusinesses.values());
-}
+];
 
 /**
  * Fetch all businesses from the API
- * Falls back to curated default data if API is unavailable
+ * Falls back to default data if API is unavailable
  */
 export async function fetchBusinesses() {
   try {
@@ -128,9 +50,8 @@ export async function fetchBusinesses() {
       console.warn('Businesses API unavailable, using default data');
       return getBusinessesWithSpotlightStatus(defaultBusinesses);
     }
-
     const businesses = await response.json();
-    return getBusinessesWithSpotlightStatus(mergeBusinesses(businesses));
+    return getBusinessesWithSpotlightStatus(businesses);
   } catch (error) {
     console.error('Error fetching businesses:', error);
     return getBusinessesWithSpotlightStatus(defaultBusinesses);
@@ -142,9 +63,9 @@ export async function fetchBusinesses() {
  */
 function getBusinessesWithSpotlightStatus(businesses) {
   const spotlighted = getSpotlightedBusinessIds();
-  return businesses.map((business) => ({
-    ...business,
-    isSpotlighted: spotlighted.includes(business.id),
+  return businesses.map(b => ({
+    ...b,
+    isSpotlighted: spotlighted.includes(b.id)
   }));
 }
 
@@ -175,41 +96,44 @@ function saveSpotlightedBusinessIds(ids) {
 export async function toggleSpotlight(businessId) {
   const currentIds = getSpotlightedBusinessIds();
   const isCurrentlySpotlighted = currentIds.includes(businessId);
-
+  
   let newIds;
   if (isCurrentlySpotlighted) {
-    newIds = currentIds.filter((id) => id !== businessId);
+    newIds = currentIds.filter(id => id !== businessId);
   } else {
     newIds = [...currentIds, businessId];
   }
-
+  
+  // Save locally
   saveSpotlightedBusinessIds(newIds);
-
+  
+  // Try to sync with backend
   try {
     const response = await fetch(spotlightUrl, {
       ...fetchOptions,
       method: 'POST',
       body: JSON.stringify({
         business_id: businessId,
-        spotlight: !isCurrentlySpotlighted,
-      }),
+        spotlight: !isCurrentlySpotlighted
+      })
     });
-
+    
     if (!response.ok) {
       console.warn('Could not sync spotlight to server, saved locally');
     }
   } catch (error) {
     console.warn('Could not sync spotlight to server:', error);
   }
-
+  
+  // Dispatch event for other components to react
   window.dispatchEvent(new CustomEvent('businessSpotlightChanged', {
     detail: {
       businessId,
       isSpotlighted: !isCurrentlySpotlighted,
-      allSpotlightedIds: newIds,
-    },
+      allSpotlightedIds: newIds
+    }
   }));
-
+  
   return !isCurrentlySpotlighted;
 }
 
@@ -218,7 +142,7 @@ export async function toggleSpotlight(businessId) {
  */
 export async function getSpotlightedBusinesses() {
   const businesses = await fetchBusinesses();
-  return businesses.filter((business) => business.isSpotlighted);
+  return businesses.filter(b => b.isSpotlighted);
 }
 
 /**
@@ -226,13 +150,14 @@ export async function getSpotlightedBusinesses() {
  */
 export function clearAllSpotlights() {
   saveSpotlightedBusinessIds([]);
-
+  
+  // Dispatch event
   window.dispatchEvent(new CustomEvent('businessSpotlightChanged', {
     detail: {
       businessId: null,
       isSpotlighted: false,
-      allSpotlightedIds: [],
-    },
+      allSpotlightedIds: []
+    }
   }));
 }
 
@@ -244,7 +169,7 @@ export function createBusinessMarkerIcon(business, isHighlighted = false) {
   const bgColor = isHighlighted ? '#10b981' : '#0066cc';
   const shadowColor = isHighlighted ? 'rgba(16, 185, 129, 0.5)' : 'rgba(0, 102, 204, 0.4)';
   const emoji = getCategoryEmoji(business.category);
-
+  
   return {
     className: 'business-marker-icon',
     html: `
@@ -260,60 +185,58 @@ export function createBusinessMarkerIcon(business, isHighlighted = false) {
         justify-content: center;
         font-size: ${isHighlighted ? '20px' : '16px'};
         cursor: pointer;
-        transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1), background 220ms ease;
-        ${isHighlighted ? 'animation: spotlight-pulse 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;' : ''}
+        transition: all 0.3s ease;
+        ${isHighlighted ? 'animation: spotlight-pulse 2s infinite;' : ''}
       ">
         ${emoji}
       </div>
     `,
     iconSize: [iconSize, iconSize],
     iconAnchor: [iconSize / 2, iconSize / 2],
-    popupAnchor: [0, -iconSize / 2],
+    popupAnchor: [0, -iconSize / 2]
   };
 }
 
 /**
  * Get emoji for business category
  */
-export function getCategoryEmoji(category) {
+function getCategoryEmoji(category) {
   const emojis = {
-    Healthcare: '🏥',
-    Health: '🏥',
-    Medical: '🏥',
+    'Healthcare': '🏥',
+    'Health': '🏥',
+    'Medical': '🏥',
     'Printing Services': '🖨️',
-    Print: '🖨️',
-    Bookstore: '📚',
-    Restaurant: '🍽️',
-    Food: '🍽️',
-    Cafe: '☕',
-    Coffee: '☕',
-    Market: '🧺',
-    Shopping: '🛍️',
-    Retail: '🛍️',
-    Automotive: '🚗',
-    Auto: '🚗',
-    Gym: '💪',
-    Fitness: '💪',
-    Entertainment: '🎭',
-    Hotel: '🏨',
-    Bank: '🏦',
-    Finance: '🏦',
-    Education: '📚',
-    School: '📚',
+    'Print': '🖨️',
+    'Restaurant': '🍽️',
+    'Food': '🍽️',
+    'Cafe': '☕',
+    'Coffee': '☕',
+    'Shopping': '🛍️',
+    'Retail': '🛍️',
+    'Automotive': '🚗',
+    'Auto': '🚗',
+    'Gym': '💪',
+    'Fitness': '💪',
+    'Entertainment': '🎭',
+    'Hotel': '🏨',
+    'Bank': '🏦',
+    'Finance': '🏦',
+    'Education': '📚',
+    'School': '📚',
     'Gas Station': '⛽',
-    Pharmacy: '💊',
-    Grocery: '🛒',
-    default: '🏢',
+    'Pharmacy': '💊',
+    'Grocery': '🛒',
+    'default': '🏢'
   };
-
+  
   if (!category) return emojis.default;
-
+  
   for (const [key, emoji] of Object.entries(emojis)) {
     if (category.toLowerCase().includes(key.toLowerCase())) {
       return emoji;
     }
   }
-
+  
   return emojis.default;
 }
 
@@ -321,29 +244,12 @@ export function getCategoryEmoji(category) {
  * Generate popup content for business marker
  */
 export function createBusinessPopupContent(business) {
-  const destination = (business.address || business.name || '').replace(/'/g, "\\'");
-  const reviewMetric = business.review?.metric
-    ? `
-      <div style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; margin-bottom: 10px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.1)); border-radius: 999px; font-size: 11px; font-weight: 600; color: #0f766e;">
-        <span>★</span>
-        <span>${business.review.metric}</span>
-      </div>
-    `
-    : '';
-
   return `
-    <div style="min-width: 220px; max-width: 300px;">
-      <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+    <div style="min-width: 200px; max-width: 280px;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
         <span style="font-size: 24px;">${getCategoryEmoji(business.category)}</span>
-        <div>
-          <strong style="display: block; color: #1e293b; font-size: 14px; line-height: 1.3; margin-bottom: 3px;">${business.name}</strong>
-          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #64748b;">
-            <span>${business.category || 'Local business'}</span>
-            ${business.neighborhood ? `<span>• ${business.neighborhood}</span>` : ''}
-          </span>
-        </div>
+        <strong style="color: #1e293b; font-size: 14px; line-height: 1.3;">${business.name}</strong>
       </div>
-      ${reviewMetric}
       <div style="font-size: 12px; color: #64748b; margin-bottom: 8px;">
         <span style="display: flex; align-items: flex-start; gap: 4px;">
           📍 ${business.address || 'San Diego, CA'}
@@ -354,17 +260,12 @@ export function createBusinessPopupContent(business) {
           ${business.description.substring(0, 120)}${business.description.length > 120 ? '...' : ''}
         </p>
       ` : ''}
-      ${business.review?.summary ? `
-        <p style="font-size: 12px; color: #0f766e; margin: 0 0 10px; line-height: 1.45;">
-          ${business.review.summary}
-        </p>
-      ` : ''}
       <div style="display: flex; gap: 8px;">
-        <a href="${business.website}" target="_blank"
+        <a href="${business.website}" target="_blank" 
            style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 8px 12px; background: linear-gradient(135deg, #0066cc 0%, #004d99 100%); color: white; border-radius: 8px; font-size: 12px; font-weight: 600; text-decoration: none;">
           Visit Site
         </a>
-        <button onclick="window.setRouteDestination && window.setRouteDestination('${destination}')"
+        <button onclick="window.setRouteDestination && window.setRouteDestination('${business.address || business.name}')"
                 style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 8px 12px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 8px; font-size: 12px; font-weight: 600; border: none; cursor: pointer;">
           🧭 Navigate
         </button>
@@ -373,6 +274,7 @@ export function createBusinessPopupContent(business) {
   `;
 }
 
+// Export for global access if needed
 window.businessesAPI = {
   fetchBusinesses,
   toggleSpotlight,
@@ -380,6 +282,5 @@ window.businessesAPI = {
   getSpotlightedBusinessIds,
   clearAllSpotlights,
   createBusinessMarkerIcon,
-  createBusinessPopupContent,
-  getCategoryEmoji,
+  createBusinessPopupContent
 };

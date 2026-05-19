@@ -35,7 +35,9 @@ menu: nav/home.html
 
   <!-- Preconnect for Performance -->
   <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://assets10.lottiefiles.com">
   <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="dns-prefetch" href="https://assets10.lottiefiles.com">
 
   <!-- External Stylesheets -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -61,447 +63,10 @@ menu: nav/home.html
       -webkit-backdrop-filter: blur(20px);
     }
 
-    .ai-guide {
-      position: relative;
-      min-height: 420px;
-      padding: clamp(1.25rem, 3vw, 2rem);
-      border-radius: 2rem;
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      background:
-        radial-gradient(circle at top left, rgba(15, 92, 153, 0.16), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(17, 138, 136, 0.16), transparent 30%),
-        linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(236, 247, 252, 0.82));
-      box-shadow: 0 34px 72px -44px rgba(8, 26, 46, 0.38);
-    }
-
-    .dark .ai-guide {
-      border-color: rgba(148, 163, 184, 0.14);
-      background:
-        radial-gradient(circle at top left, rgba(15, 92, 153, 0.24), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(17, 138, 136, 0.2), transparent 30%),
-        linear-gradient(160deg, rgba(10, 19, 33, 0.96), rgba(8, 17, 28, 0.92));
-      box-shadow: 0 34px 72px -44px rgba(2, 6, 23, 0.72);
-    }
-
-    .ai-guide::before,
-    .ai-guide::after {
-      content: '';
-      position: absolute;
-      border-radius: 999px;
-      pointer-events: none;
-    }
-
-    .ai-guide::before {
-      inset: auto auto -5rem -4rem;
-      width: 14rem;
-      height: 14rem;
-      background: radial-gradient(circle, rgba(15, 92, 153, 0.18), transparent 72%);
-    }
-
-    .ai-guide::after {
-      inset: -4rem -3rem auto auto;
-      width: 12rem;
-      height: 12rem;
-      background: radial-gradient(circle, rgba(17, 138, 136, 0.18), transparent 72%);
-    }
-
-    .ai-guide__layout {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
-      gap: 1rem;
-      align-items: stretch;
-    }
-
-    .ai-guide__scene {
-      position: relative;
-      min-height: 320px;
-      border-radius: 1.65rem;
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      background:
-        radial-gradient(circle at top right, rgba(255, 255, 255, 0.5), transparent 28%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(236, 247, 252, 0.68));
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
-    }
-
-    .dark .ai-guide__scene {
-      border-color: rgba(148, 163, 184, 0.16);
-      background:
-        radial-gradient(circle at top right, rgba(45, 212, 191, 0.08), transparent 28%),
-        linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(8, 17, 28, 0.84));
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    }
-
-    .ai-guide__scene::before,
-    .ai-guide__scene::after {
-      content: '';
-      position: absolute;
-      pointer-events: none;
-    }
-
-    .ai-guide__scene::before {
-      inset: 0;
-      background:
-        linear-gradient(rgba(15, 92, 153, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 92, 153, 0.08) 1px, transparent 1px);
-      background-size: 28px 28px;
-      opacity: 0.42;
-    }
-
-    .dark .ai-guide__scene::before {
-      background:
-        linear-gradient(rgba(103, 232, 249, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(103, 232, 249, 0.08) 1px, transparent 1px);
-    }
-
-    .ai-guide__scene::after {
-      left: -12%;
-      bottom: -28%;
-      width: 15rem;
-      height: 15rem;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(17, 138, 136, 0.16), transparent 72%);
-    }
-
-    .ai-guide__status {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.7rem 0.95rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.86);
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      box-shadow: 0 22px 38px -32px rgba(8, 26, 46, 0.36);
-      color: #0f172a;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    .dark .ai-guide__status {
-      background: rgba(15, 23, 42, 0.84);
-      border-color: rgba(148, 163, 184, 0.16);
-      color: #e2e8f0;
-    }
-
-    .ai-guide__status-dot {
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 999px;
-      background: #10b981;
-      box-shadow: 0 0 0 0.35rem rgba(16, 185, 129, 0.16);
-      animation: statusBlink 2.8s ease-in-out infinite;
-    }
-
-    .ai-guide__route {
-      position: absolute;
-      inset: 0;
+    lottie-player {
       width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .ai-guide__route-path {
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .ai-guide__route-path--base {
-      stroke: rgba(15, 92, 153, 0.18);
-      stroke-width: 15;
-    }
-
-    .ai-guide__route-path--accent {
-      stroke: rgba(17, 138, 136, 0.82);
-      stroke-width: 10;
-      stroke-dasharray: 18 16;
-      filter: drop-shadow(0 6px 14px rgba(17, 138, 136, 0.18));
-      animation: routeShift 8s linear infinite;
-    }
-
-    .dark .ai-guide__route-path--base {
-      stroke: rgba(148, 163, 184, 0.18);
-    }
-
-    .dark .ai-guide__route-path--accent {
-      stroke: rgba(103, 232, 249, 0.88);
-      filter: drop-shadow(0 6px 14px rgba(103, 232, 249, 0.18));
-    }
-
-    .ai-guide__node {
-      position: absolute;
-      z-index: 2;
-      width: 1rem;
-      height: 1rem;
-      border-radius: 999px;
-      background: white;
-      border: 4px solid #0f5c99;
-      box-shadow: 0 0 0 0.45rem rgba(15, 92, 153, 0.12);
-      animation: nodePulse 4.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-    }
-
-    .dark .ai-guide__node {
-      background: #0f172a;
-      border-color: #67e8f9;
-      box-shadow: 0 0 0 0.45rem rgba(103, 232, 249, 0.12);
-    }
-
-    .ai-guide__node--start {
-      left: 12%;
-      bottom: 18%;
-    }
-
-    .ai-guide__node--mid {
-      right: 28%;
-      top: 42%;
-      animation-delay: -1.4s;
-    }
-
-    .ai-guide__node--end {
-      right: 10%;
-      top: 17%;
-      animation-delay: -2.7s;
-    }
-
-    .ai-guide__hub {
-      position: absolute;
-      top: 54%;
-      left: 50%;
-      z-index: 3;
-      width: 172px;
-      transform: translate(-50%, -50%);
-    }
-
-    .ai-guide__hub-ring {
-      position: absolute;
-      inset: -18px;
-      border-radius: 2rem;
-      background: linear-gradient(135deg, rgba(15, 92, 153, 0.22), rgba(17, 138, 136, 0.18));
-      filter: blur(22px);
-      opacity: 0.75;
-      animation: hubAura 6s ease-in-out infinite;
-    }
-
-    .ai-guide__hub-core {
-      position: relative;
-      padding: 0.95rem 0.9rem 0.9rem;
-      border-radius: 1.75rem;
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      box-shadow: 0 28px 48px -34px rgba(8, 26, 46, 0.42);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      text-align: center;
-      animation: hubFloat 6.4s ease-in-out infinite;
-    }
-
-    .dark .ai-guide__hub-core {
-      background: rgba(15, 23, 42, 0.88);
-      border-color: rgba(148, 163, 184, 0.16);
-      box-shadow: 0 28px 48px -34px rgba(2, 6, 23, 0.72);
-    }
-
-    .ai-guide__hub-icon {
-      width: 3.5rem;
-      height: 3.5rem;
-      margin: 0 auto 0.7rem;
-      border-radius: 1.15rem;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #0f5c99, #118a88);
-      color: white;
-      font-size: 0.92rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      box-shadow: 0 18px 30px -18px rgba(15, 92, 153, 0.5);
-    }
-
-    .dark .ai-guide__hub-icon {
-      background: linear-gradient(135deg, #0891b2, #14b8a6);
-    }
-
-    .ai-guide__hub-kicker {
-      display: block;
-      color: #0f5c99;
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .dark .ai-guide__hub-kicker {
-      color: #67e8f9;
-    }
-
-    .ai-guide__hub-core strong {
-      display: block;
-      margin-top: 0.4rem;
-      color: #0f172a;
-      font-size: 1.08rem;
-      line-height: 1.2;
-    }
-
-    .dark .ai-guide__hub-core strong {
-      color: #f8fafc;
-    }
-
-    .ai-guide__hub-core span:last-child {
-      display: block;
-      margin-top: 0.45rem;
-      color: #475569;
-      font-size: 0.8rem;
-      line-height: 1.55;
-    }
-
-    .dark .ai-guide__hub-core span:last-child {
-      color: #cbd5e1;
-    }
-
-    .ai-guide__insight {
-      position: absolute;
-      z-index: 2;
-      min-width: 8rem;
-      padding: 0.8rem 0.9rem;
-      border-radius: 1rem;
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      box-shadow: 0 24px 38px -30px rgba(8, 26, 46, 0.36);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      animation: insightDrift 7.2s ease-in-out infinite;
-    }
-
-    .dark .ai-guide__insight {
-      background: rgba(15, 23, 42, 0.84);
-      border-color: rgba(148, 163, 184, 0.16);
-      box-shadow: 0 24px 38px -30px rgba(2, 6, 23, 0.7);
-    }
-
-    .ai-guide__insight span {
-      display: block;
-      color: #0f5c99;
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .dark .ai-guide__insight span {
-      color: #67e8f9;
-    }
-
-    .ai-guide__insight strong {
-      display: block;
-      margin-top: 0.3rem;
-      color: #0f172a;
-      font-size: 0.92rem;
-      line-height: 1.3;
-    }
-
-    .dark .ai-guide__insight strong {
-      color: #f8fafc;
-    }
-
-    .ai-guide__insight--eta {
-      right: 0.8rem;
-      top: 3rem;
-    }
-
-    .ai-guide__insight--hazard {
-      left: 0.9rem;
-      bottom: 0.85rem;
-      animation-delay: -2.4s;
-    }
-
-    .ai-guide__stack {
-      display: grid;
-      gap: 0.8rem;
-      align-content: center;
-    }
-
-    .ai-guide__panel {
-      position: relative;
-      overflow: hidden;
-      padding: 0.95rem 1rem;
-      border-radius: 1.15rem;
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      box-shadow: 0 22px 34px -30px rgba(8, 26, 46, 0.28);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    .ai-guide__panel::after {
-      content: '';
-      position: absolute;
-      left: -12%;
-      right: -12%;
-      bottom: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(15, 92, 153, 0.56), rgba(17, 138, 136, 0.56), transparent);
-      animation: panelSweep 7.6s ease-in-out infinite;
-    }
-
-    .ai-guide__panel:nth-child(2)::after {
-      animation-delay: -2.2s;
-    }
-
-    .ai-guide__panel:nth-child(3)::after {
-      animation-delay: -4.4s;
-    }
-
-    .dark .ai-guide__panel {
-      background: rgba(15, 23, 42, 0.78);
-      border-color: rgba(148, 163, 184, 0.14);
-      box-shadow: 0 22px 34px -30px rgba(2, 6, 23, 0.58);
-    }
-
-    .ai-guide__label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      color: #0f5c99;
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .dark .ai-guide__label {
-      color: #67e8f9;
-    }
-
-    .ai-guide__panel strong {
-      display: block;
-      margin-top: 0.45rem;
-      color: #0f172a;
-      font-size: 0.95rem;
-    }
-
-    .dark .ai-guide__panel strong {
-      color: #f8fafc;
-    }
-
-    .ai-guide__panel span:last-child {
-      display: block;
-      margin-top: 0.35rem;
-      color: #475569;
-      font-size: 0.84rem;
-      line-height: 1.5;
-    }
-
-    .dark .ai-guide__panel span:last-child {
-      color: #cbd5e1;
+      height: 400px;
+      filter: drop-shadow(0 25px 50px rgba(0, 102, 204, 0.2));
     }
 
     /* Stats counter animation */
@@ -521,7 +86,7 @@ menu: nav/home.html
 
     /* Feature icon hover */
     .feature-icon {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .feature-card:hover .feature-icon {
@@ -532,8 +97,7 @@ menu: nav/home.html
     .reveal {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: opacity, transform;
+      transition: all 0.8s ease;
     }
 
     .reveal.active {
@@ -595,7 +159,7 @@ menu: nav/home.html
       height: 2px;
       background: #374151;
       border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .dark .mobile-nav-toggle span {
@@ -660,7 +224,7 @@ menu: nav/home.html
       color: #374151;
       text-decoration: none;
       font-weight: 500;
-      transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .dark .mobile-nav-menu a {
@@ -686,7 +250,7 @@ menu: nav/home.html
     .faq-item {
       border-radius: 16px;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .faq-item:hover {
@@ -706,7 +270,7 @@ menu: nav/home.html
       text-align: left;
       font-weight: 600;
       color: #1f2937;
-      transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .dark .faq-question {
@@ -767,245 +331,23 @@ menu: nav/home.html
     .testimonial-card {
       position: relative;
       overflow: hidden;
-      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease;
     }
 
     .testimonial-card::before {
-      content: '';
+      content: '"';
       position: absolute;
-      inset: 0 0 auto;
-      height: 4px;
-      background: linear-gradient(90deg, rgba(15, 92, 153, 0.9), rgba(17, 138, 136, 0.8));
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 30px 48px -32px rgba(15, 92, 153, 0.26);
-    }
-
-    .review-signal-card {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .review-signal-card__meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .review-signal-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.45rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(15, 92, 153, 0.1);
-      color: #0f5c99;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .dark .review-signal-pill {
-      background: rgba(103, 232, 249, 0.12);
-      color: #67e8f9;
-    }
-
-    .review-signal-rating {
-      color: #0f766e;
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    .dark .review-signal-rating {
-      color: #5eead4;
-    }
-
-    .review-signal-card h3 {
-      margin: 0;
-      font-size: 1.3rem;
-      line-height: 1.25;
-    }
-
-    .review-signal-card p {
-      margin: 0;
-      line-height: 1.75;
-    }
-
-    .review-signal-card__footer {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .review-signal-card__source {
-      display: grid;
-      gap: 0.2rem;
-    }
-
-    .review-signal-card__source span:first-child {
-      color: #64748b;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .review-signal-card__source span:last-child {
-      color: #0f172a;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .dark .review-signal-card__source span:first-child {
-      color: #94a3b8;
-    }
-
-    .dark .review-signal-card__source span:last-child {
-      color: #e2e8f0;
-    }
-
-    .review-signal-card__link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      color: #0f5c99;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .dark .review-signal-card__link {
-      color: #67e8f9;
-    }
-
-    @keyframes statusBlink {
-      0%, 100% { box-shadow: 0 0 0 0.35rem rgba(16, 185, 129, 0.16); }
-      50% { box-shadow: 0 0 0 0.55rem rgba(16, 185, 129, 0.08); }
-    }
-
-    @keyframes routeShift {
-      from { stroke-dashoffset: 0; }
-      to { stroke-dashoffset: -102; }
-    }
-
-    @keyframes nodePulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0.45rem rgba(15, 92, 153, 0.12);
-      }
-      50% {
-        transform: scale(1.16);
-        box-shadow: 0 0 0 0.7rem rgba(15, 92, 153, 0.04);
-      }
-    }
-
-    @keyframes hubFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    @keyframes hubAura {
-      0%, 100% { opacity: 0.65; transform: scale(1); }
-      50% { opacity: 0.92; transform: scale(1.04); }
-    }
-
-    @keyframes insightDrift {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    @keyframes panelSweep {
-      0%, 100% { transform: translateX(-18%); opacity: 0.48; }
-      50% { transform: translateX(18%); opacity: 0.96; }
-    }
-
-    @media (max-width: 1024px) {
-      .ai-guide__layout {
-        grid-template-columns: 1fr;
-      }
-
-      .ai-guide__stack {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .ai-guide__scene {
-        min-height: 340px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .ai-guide {
-        min-height: 380px;
-      }
-
-      .ai-guide__scene {
-        min-height: 300px;
-      }
-
-      .ai-guide__hub {
-        width: 154px;
-      }
-
-      .ai-guide__insight {
-        min-width: 0;
-        max-width: 8rem;
-        padding: 0.75rem 0.8rem;
-      }
-
-      .ai-guide__insight--eta {
-        top: 4.45rem;
-        right: 0.7rem;
-      }
-
-      .ai-guide__insight--hazard {
-        left: 0.75rem;
-        bottom: 0.75rem;
-      }
-
-      .ai-guide__stack {
-        grid-template-columns: 1fr;
-      }
-
-      .review-signal-card__footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .ai-guide__status-dot,
-      .ai-guide__route-path--accent,
-      .ai-guide__node,
-      .ai-guide__hub-ring,
-      .ai-guide__hub-core,
-      .ai-guide__insight,
-      .ai-guide__panel::after,
-      .stat-item,
-      .feature-icon,
-      .testimonial-card,
-      .faq-item,
-      .faq-question,
-      .mobile-nav-toggle span,
-      .mobile-nav-menu a,
-      .reveal {
-        animation: none;
-        transition: none;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
+      top: -20px;
+      left: 20px;
+      font-size: 120px;
+      font-family: Georgia, serif;
+      color: rgba(0, 102, 204, 0.1);
+      line-height: 1;
     }
   </style>
 
   <!-- External Scripts -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
 </head>
 
 <body>
@@ -1069,19 +411,19 @@ menu: nav/home.html
             <!-- Badge -->
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium">
               <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
-              City traffic intelligence with an AI route guide
+              Official City of San Diego Initiative
             </div>
 
             <!-- Main Heading -->
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-              <span class="text-slate-900 dark:text-white">Navigate San Diego with a calmer</span>
+              <span class="text-slate-900 dark:text-white">Navigate Smarter with</span>
               <br>
-              <span class="gradient-text">SD Auto AI guide</span>
+              <span class="gradient-text">SD Auto</span>
             </h1>
 
             <!-- Description -->
             <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Real-time traffic intelligence, safer detours, and neighborhood-aware stop planning in one polished route companion built for San Diego streets.
+              Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets. Built for efficiency, driven by data.
             </p>
 
             <!-- CTA Buttons -->
@@ -1092,7 +434,7 @@ menu: nav/home.html
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-              <a href="{{site.baseurl}}/Readme4yml/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-2 border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 rounded-2xl font-semibold text-base transition-colors transition-shadow hover:shadow-medium">
+              <a href="{{site.baseurl}}/Readme4yml/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-2 border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 rounded-2xl font-semibold text-base transition-all hover:shadow-medium">
                 <span>Learn More</span>
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1101,7 +443,7 @@ menu: nav/home.html
             </div>
 
             <!-- Trust Indicators -->
-            <div class="flex items-center gap-6 justify-center lg:justify-start pt-4 flex-wrap">
+            <div class="flex items-center gap-6 justify-center lg:justify-start pt-4">
               <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
                 <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -1112,71 +454,20 @@ menu: nav/home.html
                 <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
-                <span>Hazard-aware routing</span>
-              </div>
-              <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Local stop sync</span>
+                <span>Optimized for San Diego</span>
               </div>
             </div>
           </div>
 
-          <!-- AI Guide Visual -->
+          <!-- Lottie Animation -->
           <div class="flex-1 w-full max-w-lg lg:max-w-xl animate-slide-up">
-            <div class="ai-guide">
-              <div class="ai-guide__layout">
-                <div class="ai-guide__scene">
-                  <div class="ai-guide__status">
-                    <span class="ai-guide__status-dot"></span>
-                    Live route sync
-                  </div>
-                  <svg class="ai-guide__route" viewBox="0 0 320 320" aria-hidden="true">
-                    <path class="ai-guide__route-path ai-guide__route-path--base" d="M36 254C74 220 106 188 134 173C164 157 191 163 221 136C248 112 263 76 294 54" />
-                    <path class="ai-guide__route-path ai-guide__route-path--accent" d="M54 270C89 236 118 208 152 194C188 178 220 177 244 149C266 124 279 99 298 79" />
-                  </svg>
-                  <span class="ai-guide__node ai-guide__node--start"></span>
-                  <span class="ai-guide__node ai-guide__node--mid"></span>
-                  <span class="ai-guide__node ai-guide__node--end"></span>
-                  <div class="ai-guide__hub">
-                    <div class="ai-guide__hub-ring"></div>
-                    <div class="ai-guide__hub-core">
-                      <div class="ai-guide__hub-icon">AI</div>
-                      <span class="ai-guide__hub-kicker">SD Auto guide</span>
-                      <strong>Route intelligence</strong>
-                      <span>Rebalancing traffic, hazard alerts, and local stop choices in one pass.</span>
-                    </div>
-                  </div>
-                  <div class="ai-guide__insight ai-guide__insight--eta">
-                    <span>ETA gain</span>
-                    <strong>12 min faster</strong>
-                  </div>
-                  <div class="ai-guide__insight ai-guide__insight--hazard">
-                    <span>Hazard detour</span>
-                    <strong>1 route cleaned up</strong>
-                  </div>
-                </div>
-
-                <div class="ai-guide__stack">
-                  <div class="ai-guide__panel">
-                    <span class="ai-guide__label">Live traffic</span>
-                    <strong>Congestion stays readable</strong>
-                    <span>Route decisions surface actual bottlenecks without the clutter of a generic dashboard.</span>
-                  </div>
-                  <div class="ai-guide__panel">
-                    <span class="ai-guide__label">Hazard context</span>
-                    <strong>Safer detours stay nearby</strong>
-                    <span>Hazard reporting and routing live in the same flow, so your route changes stay understandable.</span>
-                  </div>
-                  <div class="ai-guide__panel">
-                    <span class="ai-guide__label">Local stops</span>
-                    <strong>Business signals stay synced</strong>
-                    <span>Spotlighted businesses now travel cleanly from the directory into the route map experience.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <lottie-player
+              src="https://assets10.lottiefiles.com/packages/lf20_kyu7xb1v.json"
+              background="transparent"
+              speed="1"
+              loop
+              autoplay>
+            </lottie-player>
           </div>
         </div>
       </div>
@@ -1186,7 +477,7 @@ menu: nav/home.html
     <section class="py-8 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <a href="{{site.baseurl}}/route/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 transition-colors transition-shadow hover:shadow-medium">
+          <a href="{{site.baseurl}}/route/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all hover:shadow-medium">
             <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -1194,7 +485,7 @@ menu: nav/home.html
             </div>
             <span class="font-semibold text-slate-700 dark:text-slate-200 text-center">Find Best Route</span>
           </a>
-          <a href="{{site.baseurl}}/routine/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-accent-500 dark:hover:border-accent-500 transition-colors transition-shadow hover:shadow-medium">
+          <a href="{{site.baseurl}}/routine/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-accent-500 dark:hover:border-accent-500 transition-all hover:shadow-medium">
             <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center text-white shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -1202,7 +493,7 @@ menu: nav/home.html
             </div>
             <span class="font-semibold text-slate-700 dark:text-slate-200 text-center">Daily Routine</span>
           </a>
-          <a href="{{site.baseurl}}/hazard/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-warning dark:hover:border-warning transition-colors transition-shadow hover:shadow-medium">
+          <a href="{{site.baseurl}}/hazard/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-warning dark:hover:border-warning transition-all hover:shadow-medium">
             <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -1210,7 +501,7 @@ menu: nav/home.html
             </div>
             <span class="font-semibold text-slate-700 dark:text-slate-200 text-center">Report Hazard</span>
           </a>
-          <a href="{{site.baseurl}}/localbusinesses/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-success dark:hover:border-success transition-colors transition-shadow hover:shadow-medium">
+          <a href="{{site.baseurl}}/localbusinesses/" class="feature-card group flex flex-col items-center gap-3 p-6 bg-white/70 dark:bg-slate-800/70 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-success dark:hover:border-success transition-all hover:shadow-medium">
             <div class="feature-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -1403,79 +694,85 @@ menu: nav/home.html
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium mb-4">
-            Community Review Signals
+            What Users Say
           </span>
           <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Public feedback from neighborhoods SD Auto helps you reach
+            Trusted by San Diego Commuters
           </h2>
           <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            These cards paraphrase official testimonial feeds or public review listings instead of using placeholder commuter quotes.
+            Join thousands of San Diegans who navigate smarter every day
           </p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
-          <article class="testimonial-card review-signal-card reveal bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="review-signal-card__meta">
-              <span class="review-signal-pill">Official testimonial feed</span>
-              <span class="review-signal-rating">Patient feedback</span>
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
+            <div class="flex items-center gap-1 mb-4">
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             </div>
-            <h3 class="text-slate-900 dark:text-white">ActiveMed Integrative Health Center</h3>
-            <p class="text-slate-600 dark:text-slate-300">
-              Published patient feedback on ActiveMed&apos;s site repeatedly highlights attentive staff, clear treatment explanations, and relief throughout recovery planning.
+            <p class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+              "SD Auto has completely changed my daily commute from La Jolla to Downtown. I save at least 20 minutes every day by avoiding traffic hotspots!"
             </p>
-            <div class="review-signal-card__footer">
-              <div class="review-signal-card__source">
-                <span>Source</span>
-                <span>activemedhealth.com testimonials</span>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-bold">
+                MR
               </div>
-              <a class="review-signal-card__link" href="https://activemedhealth.com/" target="_blank" rel="noreferrer">
-                <span>View business</span>
-                <span aria-hidden="true">↗</span>
-              </a>
+              <div>
+                <p class="font-semibold text-slate-900 dark:text-white">Maria R.</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400">La Jolla Resident</p>
+              </div>
             </div>
-          </article>
+          </div>
 
-          <article class="testimonial-card review-signal-card reveal bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="review-signal-card__meta">
-              <span class="review-signal-pill">Public review listings</span>
-              <span class="review-signal-rating">300+ review signals</span>
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
+            <div class="flex items-center gap-1 mb-4">
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             </div>
-            <h3 class="text-slate-900 dark:text-white">Verbatim Books</h3>
-            <p class="text-slate-600 dark:text-slate-300">
-              Public review snippets frequently call out the deep secondhand selection, approachable pricing, and the kind of browse-friendly atmosphere that keeps people lingering.
+            <p class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+              "The daily routine planner is a game-changer! I can plan my entire day with multiple stops and it optimizes everything automatically."
             </p>
-            <div class="review-signal-card__footer">
-              <div class="review-signal-card__source">
-                <span>Source</span>
-                <span>Public Yelp-style review listings</span>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white font-bold">
+                JT
               </div>
-              <a class="review-signal-card__link" href="https://www.verbatimbooks.com/" target="_blank" rel="noreferrer">
-                <span>View business</span>
-                <span aria-hidden="true">↗</span>
-              </a>
+              <div>
+                <p class="font-semibold text-slate-900 dark:text-white">James T.</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400">Small Business Owner</p>
+              </div>
             </div>
-          </article>
+          </div>
 
-          <article class="testimonial-card review-signal-card reveal bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
-            <div class="review-signal-card__meta">
-              <span class="review-signal-pill">Public review listings</span>
-              <span class="review-signal-rating">700+ review signals</span>
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
+            <div class="flex items-center gap-1 mb-4">
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             </div>
-            <h3 class="text-slate-900 dark:text-white">Liberty Public Market</h3>
-            <p class="text-slate-600 dark:text-slate-300">
-              Public review coverage tends to emphasize the vendor variety, group-friendly layout, and the ease of turning one stop into an all-day neighborhood visit.
+            <p class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+              "As a delivery driver, SD Auto Pro is essential. Unlimited routes and the hazard alerts keep me efficient and safe on the road."
             </p>
-            <div class="review-signal-card__footer">
-              <div class="review-signal-card__source">
-                <span>Source</span>
-                <span>Public travel and restaurant review listings</span>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white font-bold">
+                SK
               </div>
-              <a class="review-signal-card__link" href="https://libertypublicmarketsd.com/" target="_blank" rel="noreferrer">
-                <span>View business</span>
-                <span aria-hidden="true">↗</span>
-              </a>
+              <div>
+                <p class="font-semibold text-slate-900 dark:text-white">Sarah K.</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400">Delivery Professional</p>
+              </div>
             </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
@@ -1598,7 +895,7 @@ menu: nav/home.html
               Join thousands of San Diegans using SD Auto for their daily commute. Start optimizing your routes today.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="{{site.baseurl}}/login/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-105 transition-transform transition-shadow">
+              <a href="{{site.baseurl}}/login/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-105 transition-all">
                 <span>Get Started Free</span>
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />

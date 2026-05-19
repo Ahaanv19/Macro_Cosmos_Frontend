@@ -457,56 +457,11 @@
       border-radius: 4px;
     }
 
-    html {
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-    }
-
-    .site-body {
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-kerning: normal;
-    }
-
-    /* Keep transitions scoped to interactive and high-motion elements. */
-    :where(
-      a,
-      button,
-      input,
-      textarea,
-      select,
-      summary,
-      .nav-link,
-      .btn-primary,
-      .card-hover,
-      .shell-primary-action,
-      .shell-secondary-action,
-      .site-brand-mark,
-      .floating-shape
-    ) {
-      transition-property: background-color, border-color, box-shadow, color, opacity, transform;
+    /* Smooth transitions for dark mode */
+    * {
+      transition-property: background-color, border-color, color;
       transition-duration: 200ms;
-      transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html:focus-within {
-        scroll-behavior: auto;
-      }
-
-      .floating-shape {
-        animation: none;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
+      transition-timing-function: ease-out;
     }
 
     /* Badge styles */

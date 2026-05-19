@@ -7,839 +7,678 @@ nav: true
 ---
 
 <style>
-  :root {
-    --business-shell-max: 1200px;
-    --business-border: rgba(148, 163, 184, 0.18);
-    --business-shadow: 0 28px 60px -42px rgba(8, 26, 46, 0.42);
-    --business-shadow-strong: 0 34px 70px -38px rgba(8, 26, 46, 0.54);
-    --business-text: #0f172a;
-    --business-muted: #475569;
-    --business-surface: rgba(255, 255, 255, 0.82);
-    --business-surface-strong: rgba(255, 255, 255, 0.9);
-    --business-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .business-shell {
-    width: min(100%, var(--business-shell-max));
-    margin: 0 auto;
-    padding: clamp(1.25rem, 3vw, 2rem) 1rem 3rem;
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .business-hero {
-    position: relative;
-    overflow: hidden;
-    padding: clamp(1.5rem, 4vw, 3rem);
-    border-radius: 2rem;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    background:
-      radial-gradient(circle at top left, rgba(15, 92, 153, 0.18), transparent 30%),
-      radial-gradient(circle at bottom right, rgba(17, 138, 136, 0.18), transparent 32%),
-      linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(241, 245, 249, 0.82));
-    box-shadow: var(--business-shadow);
-    backdrop-filter: blur(18px);
-  }
-
-  .business-hero::after {
-    content: '';
-    position: absolute;
-    inset: auto -10% -35% auto;
-    width: 18rem;
-    height: 18rem;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(15, 92, 153, 0.16), transparent 70%);
-    pointer-events: none;
-  }
-
-  .business-hero-grid {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
-    gap: 1.5rem;
-    align-items: stretch;
-  }
-
-  .business-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.6rem 1rem;
-    border-radius: 999px;
-    background: rgba(15, 92, 153, 0.1);
-    color: #0f5c99;
-    font-size: 0.875rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-  }
-
-  .business-eyebrow span {
-    width: 0.6rem;
-    height: 0.6rem;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #0f5c99, #118a88);
-    box-shadow: 0 0 0 0.4rem rgba(17, 138, 136, 0.12);
-  }
-
-  .business-hero h1 {
-    margin: 1rem 0 0.9rem;
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
-    line-height: 1.02;
-    letter-spacing: -0.04em;
-    color: var(--business-text);
-  }
-
-  .business-hero p {
-    margin: 0;
-    max-width: 40rem;
-    color: var(--business-muted);
-    font-size: 1rem;
-    line-height: 1.75;
-  }
-
-  .business-stats {
-    margin-top: 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.85rem;
-  }
-
-  .business-stat {
-    padding: 1rem 1.1rem;
-    border-radius: 1.25rem;
-    background: var(--business-surface-strong);
-    border: 1px solid rgba(148, 163, 184, 0.16);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
-  }
-
-  .business-stat strong {
-    display: block;
-    font-size: 1.35rem;
-    line-height: 1;
-    color: var(--business-text);
-  }
-
-  .business-stat span {
-    display: block;
-    margin-top: 0.45rem;
-    color: var(--business-muted);
-    font-size: 0.86rem;
-  }
-
-  .business-method {
-    padding: 1.35rem;
-    border-radius: 1.5rem;
-    border: 1px solid rgba(148, 163, 184, 0.16);
-    background: rgba(255, 255, 255, 0.72);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  }
-
-  .business-method h2 {
-    margin: 0 0 0.7rem;
-    font-size: 1rem;
-    color: var(--business-text);
-  }
-
-  .business-method p,
-  .business-method li {
-    color: var(--business-muted);
-    font-size: 0.94rem;
-    line-height: 1.7;
-  }
-
-  .business-method ul {
-    margin: 0.85rem 0 0;
-    padding-left: 1.1rem;
-  }
-
-  .spotlight-banner {
-    display: none;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    padding: 1rem 1.1rem;
-    border-radius: 1.5rem;
-    border: 1px solid rgba(16, 185, 129, 0.26);
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.12));
-    box-shadow: 0 16px 40px -34px rgba(5, 150, 105, 0.56);
-  }
-
-  .spotlight-banner.is-visible {
-    display: flex;
-  }
-
-  .spotlight-banner__copy {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-  }
-
-  .spotlight-banner__icon {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1rem;
-    display: grid;
-    place-items: center;
-    font-size: 1.25rem;
-    color: white;
-    background: linear-gradient(135deg, #10b981, #059669);
-    box-shadow: 0 16px 28px -18px rgba(5, 150, 105, 0.6);
-  }
-
-  .spotlight-banner__copy strong {
-    display: block;
-    color: #064e3b;
-  }
-
-  .spotlight-banner__copy span {
-    color: rgba(6, 78, 59, 0.78);
-    font-size: 0.9rem;
-  }
-
-  .spotlight-banner__actions {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .spotlight-count {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.7rem 1rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.86);
-    color: #065f46;
-    font-size: 0.9rem;
-    font-weight: 700;
-  }
-
-  .view-on-map-btn,
-  .business-button,
-  .spotlight-toggle {
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    font: inherit;
-  }
-
-  .view-on-map-btn,
-  .business-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-    padding: 0.88rem 1.1rem;
-    border-radius: 1rem;
-    transition: transform 220ms var(--business-ease), box-shadow 220ms var(--business-ease), background-color 220ms ease;
-  }
-
-  .view-on-map-btn {
-    color: white;
-    background: linear-gradient(135deg, #0f5c99, #118a88);
-    box-shadow: 0 18px 34px -24px rgba(15, 92, 153, 0.6);
-  }
-
-  .view-on-map-btn:hover,
-  .business-button:hover,
-  .spotlight-toggle:hover {
-    transform: translateY(-2px);
-  }
-
-  .business-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.2rem;
-  }
-
-  .business-card {
-    position: relative;
-    overflow: hidden;
-    padding: 1.35rem;
-    border-radius: 1.75rem;
-    border: 1px solid rgba(148, 163, 184, 0.16);
-    background:
-      radial-gradient(circle at top right, rgba(255, 255, 255, 0.6), transparent 32%),
-      linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.86));
-    box-shadow: var(--business-shadow);
-    display: grid;
-    gap: 1rem;
-    transition: transform 260ms var(--business-ease), box-shadow 260ms var(--business-ease), border-color 260ms ease;
-  }
-
-  .business-card::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto;
-    height: 4px;
-    background: linear-gradient(90deg, var(--business-accent), var(--business-accent-strong));
-    opacity: 0.82;
-  }
-
-  .business-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--business-shadow-strong);
-    border-color: rgba(148, 163, 184, 0.28);
-  }
-
-  .business-card.spotlighted {
-    border-color: rgba(16, 185, 129, 0.32);
-    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.12), var(--business-shadow-strong);
-  }
-
-  .business-card__header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .business-card__intro {
-    display: flex;
-    gap: 0.9rem;
-  }
-
-  .business-card__icon {
-    flex: 0 0 auto;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 1.15rem;
-    display: grid;
-    place-items: center;
-    font-size: 1.45rem;
-    color: white;
-    background: linear-gradient(135deg, var(--business-accent), var(--business-accent-strong));
-    box-shadow: 0 18px 32px -22px rgba(15, 92, 153, 0.35);
-  }
-
-  .business-card__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    margin-bottom: 0.45rem;
-    color: var(--business-muted);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .business-card__eyebrow span:last-child {
-    color: var(--business-accent);
-  }
-
-  .business-card h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    line-height: 1.2;
-    color: var(--business-text);
-  }
-
-  .business-card__address {
-    margin: 0.5rem 0 0;
-    color: var(--business-muted);
-    font-size: 0.92rem;
-    line-height: 1.6;
-  }
-
-  .business-card__summary {
-    margin: 0;
-    color: var(--business-muted);
-    font-size: 0.98rem;
-    line-height: 1.75;
-  }
-
-  .spotlight-toggle {
-    flex: 0 0 auto;
-    width: 2.9rem;
-    height: 2.9rem;
-    border-radius: 1rem;
-    display: grid;
-    place-items: center;
-    color: #0f766e;
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(16, 185, 129, 0.22);
-    box-shadow: 0 10px 26px -18px rgba(5, 150, 105, 0.56);
-    transition: transform 220ms var(--business-ease), box-shadow 220ms var(--business-ease), background-color 220ms ease, color 220ms ease, border-color 220ms ease;
-  }
-
-  .spotlight-toggle.is-active {
-    color: white;
-    border-color: transparent;
-    background: linear-gradient(135deg, #10b981, #059669);
-    box-shadow: 0 18px 34px -20px rgba(5, 150, 105, 0.7);
-  }
-
-  .business-card__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
-  }
-
-  .business-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.5rem 0.8rem;
-    border-radius: 999px;
-    background: rgba(241, 245, 249, 0.9);
-    color: #334155;
-    font-size: 0.84rem;
-    font-weight: 600;
-  }
-
-  .business-proof {
-    padding: 0.95rem 1rem;
-    border-radius: 1.25rem;
-    border: 1px solid rgba(148, 163, 184, 0.14);
-    background: rgba(255, 255, 255, 0.84);
-  }
-
-  .business-proof__label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    color: var(--business-accent);
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .business-proof strong {
-    display: block;
-    margin-top: 0.55rem;
-    color: var(--business-text);
-    font-size: 0.95rem;
-  }
-
-  .business-proof p {
-    margin: 0.45rem 0 0;
-    color: var(--business-muted);
-    font-size: 0.92rem;
-    line-height: 1.65;
-  }
-
-  .business-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .business-button {
-    flex: 1 1 10rem;
-    min-width: 0;
-    font-size: 0.95rem;
-    font-weight: 700;
-  }
-
-  .business-button--primary {
-    color: white;
-    background: linear-gradient(135deg, var(--business-accent), var(--business-accent-strong));
-    box-shadow: 0 18px 34px -24px rgba(15, 92, 153, 0.48);
-  }
-
-  .business-button--secondary {
-    color: var(--business-text);
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  }
-
-  .business-empty {
-    padding: 2rem;
-    border-radius: 1.5rem;
-    border: 1px dashed rgba(148, 163, 184, 0.28);
-    background: rgba(255, 255, 255, 0.72);
-    text-align: center;
-    color: var(--business-muted);
-  }
-
-  .dark .business-hero {
-    border-color: rgba(148, 163, 184, 0.16);
-    background:
-      radial-gradient(circle at top left, rgba(15, 92, 153, 0.22), transparent 30%),
-      radial-gradient(circle at bottom right, rgba(17, 138, 136, 0.18), transparent 32%),
-      linear-gradient(145deg, rgba(9, 18, 32, 0.94), rgba(12, 24, 41, 0.88));
-  }
-
-  .dark .business-hero h1,
-  .dark .business-method h2,
-  .dark .business-stat strong,
-  .dark .business-card h2,
-  .dark .business-proof strong {
-    color: #f8fafc;
-  }
-
-  .dark .business-hero p,
-  .dark .business-method p,
-  .dark .business-method li,
-  .dark .business-stat span,
-  .dark .business-card__address,
-  .dark .business-card__summary,
-  .dark .business-proof p,
-  .dark .business-tag {
-    color: #cbd5e1;
-  }
-
-  .dark .business-stat,
-  .dark .business-method,
-  .dark .business-card,
-  .dark .business-proof,
-  .dark .business-button--secondary,
-  .dark .spotlight-toggle,
-  .dark .spotlight-count {
-    background: rgba(10, 19, 33, 0.82);
-    border-color: rgba(148, 163, 184, 0.14);
-  }
-
-  .dark .business-card {
-    background:
-      radial-gradient(circle at top right, rgba(255, 255, 255, 0.06), transparent 28%),
-      linear-gradient(160deg, rgba(10, 19, 33, 0.96), rgba(7, 14, 24, 0.92));
-  }
-
-  .dark .business-tag {
-    background: rgba(15, 23, 42, 0.88);
-  }
-
-  .dark .spotlight-banner {
-    border-color: rgba(16, 185, 129, 0.22);
-    background: linear-gradient(135deg, rgba(5, 150, 105, 0.2), rgba(8, 145, 178, 0.18));
-  }
-
-  .dark .spotlight-banner__copy strong {
-    color: #d1fae5;
-  }
-
-  .dark .spotlight-banner__copy span {
-    color: rgba(209, 250, 229, 0.8);
-  }
-
-  @media (max-width: 900px) {
-    .business-hero-grid {
-      grid-template-columns: 1fr;
+    /* SD Auto Professional Local Businesses Styles */
+    :root {
+      --primary-500: #0066cc;
+      --primary-600: #0052a3;
+      --primary-700: #004080;
+      --accent-500: #06b6d4;
+      --accent-600: #0891b2;
+      --spotlight-500: #10b981;
+      --spotlight-600: #059669;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --white: #ffffff;
+      --bg-light: #f8fafc;
+      --border-light: rgba(0, 102, 204, 0.08);
+      --shadow-soft: 0 4px 6px -1px rgba(0, 102, 204, 0.05), 0 10px 15px -3px rgba(0, 102, 204, 0.08);
+      --shadow-medium: 0 10px 15px -3px rgba(0, 102, 204, 0.1), 0 20px 25px -5px rgba(0, 102, 204, 0.1);
     }
 
-    .business-stats {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .business-shell {
-      padding-inline: 0.85rem;
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-primary);
     }
 
-    .spotlight-banner,
-    .spotlight-banner__copy,
-    .spotlight-banner__actions,
-    .business-card__header,
-    .business-card__intro,
-    .business-actions {
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .page-header .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-500);
+      margin-bottom: 16px;
+    }
+
+    .page-header h1 {
+      font-size: 36px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0 0 16px 0;
+    }
+
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Container Grid */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 32px;
+    }
+
+    /* Business Card */
+    .business-card {
+      background: linear-gradient(135deg, var(--white) 0%, var(--bg-light) 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-light);
+      display: flex;
       flex-direction: column;
-      align-items: stretch;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
     }
 
-    .spotlight-toggle,
-    .business-button,
-    .view-on-map-btn {
+    .business-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-500), var(--accent-500));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .business-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .business-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Card Title */
+    .title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 24px 24px 0;
+      background: transparent;
+      color: var(--text-primary);
+      position: relative;
+    }
+
+    .title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-500), var(--accent-500));
+      border-radius: 2px;
+      margin: 16px auto 0;
+    }
+
+    /* Top Section */
+    .top-section {
+      display: flex;
+      gap: 24px;
+      padding: 24px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    /* Card Image */
+    .cover-img {
+      flex-shrink: 0;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.15);
+      border: 3px solid var(--white);
+      transition: transform 0.3s ease;
+    }
+
+    .business-card:hover .cover-img {
+      transform: scale(1.05);
+    }
+
+    /* Visit Button */
+    .visit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      color: var(--white);
+      padding: 14px 28px;
+      border: none;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .visit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
       width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
     }
 
-    .spotlight-banner__icon {
-      align-self: flex-start;
+    .visit-btn:hover {
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.35);
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .business-card,
-    .view-on-map-btn,
-    .business-button,
-    .spotlight-toggle {
-      transition: none;
+    .visit-btn:hover::before {
+      left: 100%;
     }
-  }
-</style>
 
-<section class='business-shell'>
-  <div class='business-hero'>
-    <div class='business-hero-grid'>
-      <div>
-        <div class='business-eyebrow'><span></span> Updated San Diego business guide</div>
-        <h1>Local Businesses Worth the Detour</h1>
-        <p>
-          The Local Businesses page now renders from the same shared catalog used by the route map, so listings, spotlight state,
-          and review-backed notes stay in sync instead of drifting across multiple files.
-        </p>
-        <div class='business-stats' id='business-stats'>
-          <div class='business-stat'>
-            <strong id='business-count'>0</strong>
-            <span>Live listings</span>
-          </div>
-          <div class='business-stat'>
-            <strong id='neighborhood-count'>0</strong>
-            <span>Neighborhoods covered</span>
-          </div>
-          <div class='business-stat'>
-            <strong id='review-count'>0</strong>
-            <span>Review-backed profiles</span>
-          </div>
-        </div>
-      </div>
+    /* Text Bubble */
+    .text-bubble {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      color: var(--text-primary);
+      border-radius: 16px;
+      margin: 0 24px 24px;
+      padding: 20px;
+      line-height: 1.7;
+      font-size: 15px;
+      position: relative;
+      border-left: 4px solid var(--primary-500);
+    }
 
-      <aside class='business-method'>
-        <h2>How these listings were refreshed</h2>
-        <p>
-          Entries were updated against public business sites where available, then enriched with review context only when a public
-          source or official testimonial feed was visible.
-        </p>
-        <ul>
-          <li>Names, websites, and location context were verified from business pages where possible.</li>
-          <li>Review language is paraphrased from public listings or official testimonial feeds to avoid placeholder quotes.</li>
-          <li>Spotlighting a business here updates the same shared state used on the route map.</li>
-        </ul>
-      </aside>
+    /* Wide Image Card */
+    .wide-card {
+      padding-bottom: 0;
+    }
+
+    .wide-img-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      padding: 20px;
+    }
+
+    .cover-wide-img {
+      width: calc(100% - 40px);
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .business-card:hover .cover-wide-img {
+      transform: scale(1.02);
+    }
+
+    .visit-btn-wrapper {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    /* Dark Mode Support */
+    .dark .business-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-color: rgba(148, 163, 184, 0.1);
+    }
+
+    .dark .title {
+      color: #e2e8f0;
+    }
+
+    .dark .text-bubble {
+      background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+      color: #e2e8f0;
+      border-left-color: #60a5fa;
+    }
+
+    .dark .wide-img-wrapper {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .dark .page-header p {
+      color: #94a3b8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+      }
+
+      .top-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .cover-img {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        aspect-ratio: 1;
+      }
+
+      .visit-btn {
+        width: 100%;
+        justify-content: center;
+        margin-top: 16px;
+      }
+
+      .text-bubble {
+        margin: 0 16px 20px;
+      }
+
+      .cover-wide-img {
+        max-height: none;
+        height: auto;
+      }
+
+      .page-header h1 {
+        font-size: 28px;
+      }
+
+      .page-header p {
+        font-size: 16px;
+        padding: 0 16px;
+      }
+    }
+
+    /* ===== SPOTLIGHT STYLES ===== */
+    .spotlight-banner {
+      max-width: 1200px;
+      margin: 0 auto 32px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .spotlight-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .spotlight-info-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .spotlight-info-text h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 4px;
+    }
+
+    .dark .spotlight-info-text h3 {
+      color: #e2e8f0;
+    }
+
+    .spotlight-info-text p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .spotlight-count {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .spotlight-count-badge {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 50px;
+    }
+
+    .view-on-map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #0066cc 0%, #004d99 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+    }
+
+    .view-on-map-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 102, 204, 0.35);
+    }
+
+    /* Spotlight Button on Cards */
+    .spotlight-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 2px solid rgba(16, 185, 129, 0.3);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .dark .spotlight-btn {
+      background: rgba(30, 41, 59, 0.9);
+    }
+
+    .spotlight-btn:hover {
+      transform: scale(1.1);
+      border-color: #10b981;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .spotlight-btn.active {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border-color: #10b981;
+      color: white;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .spotlight-btn.active::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 14px;
+      border: 2px solid rgba(16, 185, 129, 0.5);
+      animation: spotlight-pulse 2s infinite;
+    }
+
+    @keyframes spotlight-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0; transform: scale(1.15); }
+    }
+
+    /* Spotlighted Card State */
+    .business-card.spotlighted {
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2), var(--shadow-medium);
+    }
+
+    .business-card.spotlighted::before {
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+      opacity: 1;
+    }
+
+    .business-card.spotlighted .title::after {
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+    }
+
+    /* Navigate Button */
+    .navigate-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: var(--white);
+      padding: 14px 28px;
+      border: none;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .navigate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    /* Button Group */
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .spotlight-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .spotlight-info {
+        flex-direction: column;
+      }
+
+      .btn-group {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-group .visit-btn,
+      .btn-group .navigate-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="badge">
+      <span>🏢</span> Supporting Local Economy
     </div>
+    <h1>San Diego Local Businesses</h1>
+    <p>Discover and support amazing local businesses in San Diego. Spotlight businesses to see them on your route map!</p>
   </div>
 
-  <div class='spotlight-banner' id='spotlight-banner' aria-live='polite'>
-    <div class='spotlight-banner__copy'>
-      <div class='spotlight-banner__icon'>★</div>
-      <div>
-        <strong>Spotlighted on your route map</strong>
-        <span id='spotlight-summary'>Choose businesses to keep them visible while routing.</span>
+  <!-- Spotlight Banner -->
+  <div class="spotlight-banner" id="spotlight-banner" style="display: none;">
+    <div class="spotlight-info">
+      <div class="spotlight-info-icon">⭐</div>
+      <div class="spotlight-info-text">
+        <h3>Spotlighted Businesses</h3>
+        <p>These businesses will appear as markers on your route map</p>
       </div>
     </div>
-    <div class='spotlight-banner__actions'>
-      <div class='spotlight-count' id='spotlight-count'>0 selected</div>
-      <a class='view-on-map-btn' href='{{site.baseurl}}/route/'>
-        <span>Open route map</span>
-        <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
-          <path d='M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7' />
+    <div class="spotlight-count">
+      <span class="spotlight-count-badge" id="spotlight-count">0 selected</span>
+      <a href="{{site.baseurl}}/route/" class="view-on-map-btn">
+        <span>View on Map</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
         </svg>
       </a>
     </div>
   </div>
 
-  <div class='business-grid' id='businesses-container'></div>
-</section>
+  <div class="container" id="businesses-container">
 
-<script type='module'>
-  import {
-    fetchBusinesses,
-    getCategoryEmoji,
-    getSpotlightedBusinessIds,
-    toggleSpotlight,
-  } from '{{site.baseurl}}/assets/js/api/businesses.js';
+    <!-- Business Card 1 -->
+    <div class="business-card" data-business-id="1" data-address="11588 Via Rancho San Diego, Suite 101, El Cajon, CA 92019">
+      <button class="spotlight-btn" onclick="toggleBusinessSpotlight(1)" title="Spotlight this business on map">
+        ⭐
+      </button>
+      <div class="title">ActiveMed Integrative Health Center</div>
+      <div class="top-section">
+        <img class="cover-img" src="{{site.baseurl}}/images/bus.png" alt="ActiveMed Image">
+        <div class="btn-group">
+          <a href="https://activemedhealth.com/" target="_blank" class="visit-btn">
+            <span>Visit Site</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+          <button class="navigate-btn" onclick="navigateToBusiness('11588 Via Rancho San Diego, Suite 101, El Cajon, CA 92019')">
+            <span>🧭</span>
+            <span>Navigate</span>
+          </button>
+        </div>
+      </div>
+      <div class="text-bubble">
+        We believe in a collaborative approach to healthcare. We offer acupuncture, massage therapy, functional medicine, physical therapy, and axon therapy.
+      </div>
+    </div>
 
+    <!-- Business Card 2: Wider Image Layout -->
+    <div class="business-card wide-card" data-business-id="2" data-address="12630 Poway Rd, Poway, CA 92064">
+      <button class="spotlight-btn" onclick="toggleBusinessSpotlight(2)" title="Spotlight this business on map">
+        ⭐
+      </button>
+      <div class="title">Digital One Printing</div>
+      <div class="wide-img-wrapper">
+        <img class="cover-wide-img" src="{{site.baseurl}}/images/Screenshot 2025-07-23 at 8.34.48 AM.png" alt="Digital One Image">
+      </div>
+      <div class="visit-btn-wrapper">
+        <div class="btn-group" style="justify-content: center;">
+          <a href="https://d1printing.net/" target="_blank" class="visit-btn">
+            <span>Visit Site</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+          <button class="navigate-btn" onclick="navigateToBusiness('12630 Poway Rd, Poway, CA 92064')">
+            <span>🧭</span>
+            <span>Navigate</span>
+          </button>
+        </div>
+      </div>
+      <div class="text-bubble">
+        Digital One Printing is your premier one-stop Poway printshop that offers a wide range of services, has many years of experience and a tremendous reputation. Digital, Offset, Large Format, Posters, Banners, Trade show graphics, Signs, Promotional Products, Bindery and more.
+      </div>
+    </div>
+
+  </div>
+
+<script type="module">
+  import { toggleSpotlight, getSpotlightedBusinessIds } from '{{site.baseurl}}/assets/js/api/businesses.js';
+
+  // Storage key for spotlighted businesses
   const SPOTLIGHT_STORAGE_KEY = 'sd_auto_spotlighted_businesses';
-  const businessCountEl = document.getElementById('business-count');
-  const neighborhoodCountEl = document.getElementById('neighborhood-count');
-  const reviewCountEl = document.getElementById('review-count');
-  const businessesContainer = document.getElementById('businesses-container');
-  const spotlightBanner = document.getElementById('spotlight-banner');
-  const spotlightCount = document.getElementById('spotlight-count');
-  const spotlightSummary = document.getElementById('spotlight-summary');
 
-  let businesses = [];
-
+  // Get base URL for navigation
   function getBaseUrl() {
     const pathMatch = window.location.pathname.match(/^(\/[^\/]+)/);
     if (pathMatch && pathMatch[1] !== '/localbusinesses') {
       return pathMatch[1];
     }
-
     return '/SD_Auto_Frontend';
   }
 
-  function escapeHtml(value = '') {
-    return String(value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
+  // Toggle spotlight for a business
+  window.toggleBusinessSpotlight = async function(businessId) {
+    const isNowSpotlighted = await toggleSpotlight(businessId);
+    updateSpotlightUI();
+  };
 
-  function sanitizeUrl(value = '') {
-    try {
-      const parsed = new URL(value);
-      return ['http:', 'https:'].includes(parsed.protocol) ? parsed.toString() : '#';
-    } catch {
-      return '#';
-    }
-  }
+  // Navigate to business (opens route page with destination pre-filled)
+  window.navigateToBusiness = function(address) {
+    const baseUrl = getBaseUrl();
+    window.location.href = `${baseUrl}/route/?destination=${encodeURIComponent(address)}`;
+  };
 
-  function getAccentForCategory(category) {
-    const accents = {
-      Healthcare: { primary: '#0f766e', secondary: '#14b8a6' },
-      'Printing Services': { primary: '#1d4ed8', secondary: '#2563eb' },
-      Bookstore: { primary: '#7c3aed', secondary: '#a855f7' },
-      Cafe: { primary: '#b45309', secondary: '#f59e0b' },
-      Market: { primary: '#db2777', secondary: '#fb7185' },
-      default: { primary: '#0f5c99', secondary: '#118a88' },
-    };
-
-    return accents[category] || accents.default;
-  }
-
-  function renderHighlights(highlights = []) {
-    if (!highlights.length) {
-      return '';
-    }
-
-    return `
-      <div class='business-card__tags'>
-        ${highlights.map((highlight) => `<span class='business-tag'>${escapeHtml(highlight)}</span>`).join('')}
-      </div>
-    `;
-  }
-
-  function renderProof(review) {
-    if (!review) {
-      return `
-        <div class='business-proof'>
-          <span class='business-proof__label'>Catalog note</span>
-          <strong>Verified business profile</strong>
-          <p>This listing was refreshed from the shared catalog so the route map and this page stay aligned.</p>
-        </div>
-      `;
-    }
-
-    return `
-      <div class='business-proof'>
-        <span class='business-proof__label'>Review signal</span>
-        <strong>${escapeHtml(review.metric || review.source || 'Public review context')}</strong>
-        <p>${escapeHtml(review.summary || '')}</p>
-      </div>
-    `;
-  }
-
-  function renderBusinessCard(business) {
-    const accent = getAccentForCategory(business.category);
-    const emoji = getCategoryEmoji(business.category);
-    const address = business.address || 'San Diego, CA';
-    const category = business.category || 'Local business';
-    const neighborhood = business.neighborhood || 'San Diego';
-    const website = sanitizeUrl(business.website || '#');
-    const description = business.description || 'Fresh listing available in the shared SD Auto business catalog.';
-    const spotlighted = getSpotlightedBusinessIds().includes(Number(business.id));
-
-    return `
-      <article class='business-card${spotlighted ? ' spotlighted' : ''}' style='--business-accent: ${accent.primary}; --business-accent-strong: ${accent.secondary};' data-business-id='${Number(business.id)}' data-address='${escapeHtml(address)}'>
-        <div class='business-card__header'>
-          <div class='business-card__intro'>
-            <div class='business-card__icon' aria-hidden='true'>${emoji}</div>
-            <div>
-              <div class='business-card__eyebrow'>
-                <span>${escapeHtml(category)}</span>
-                <span>${escapeHtml(neighborhood)}</span>
-              </div>
-              <h2>${escapeHtml(business.name)}</h2>
-              <p class='business-card__address'>${escapeHtml(address)}</p>
-            </div>
-          </div>
-
-          <button class='spotlight-toggle${spotlighted ? ' is-active' : ''}' type='button' data-spotlight-id='${Number(business.id)}' aria-pressed='${spotlighted ? 'true' : 'false'}' aria-label='${spotlighted ? 'Remove spotlight for' : 'Spotlight'} ${escapeHtml(business.name)}'>
-            ★
-          </button>
-        </div>
-
-        <p class='business-card__summary'>${escapeHtml(description)}</p>
-        ${renderHighlights(business.highlights)}
-        ${renderProof(business.review)}
-
-        <div class='business-actions'>
-          <a class='business-button business-button--primary' href='${website}' target='_blank' rel='noreferrer'>
-            <span>Visit website</span>
-            <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-              <path d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'></path>
-              <polyline points='15 3 21 3 21 9'></polyline>
-              <line x1='10' y1='14' x2='21' y2='3'></line>
-            </svg>
-          </a>
-          <button class='business-button business-button--secondary' type='button' data-navigate-address='${escapeHtml(address)}'>
-            <span>Navigate here</span>
-            <span aria-hidden='true'>→</span>
-          </button>
-        </div>
-      </article>
-    `;
-  }
-
-  function updateStats() {
-    businessCountEl.textContent = String(businesses.length);
-    neighborhoodCountEl.textContent = String(new Set(businesses.map((business) => business.neighborhood).filter(Boolean)).size);
-    reviewCountEl.textContent = String(businesses.filter((business) => business.review).length);
-  }
-
+  // Update UI based on current spotlight state
   function updateSpotlightUI() {
     const spotlightedIds = getSpotlightedBusinessIds();
+    const banner = document.getElementById('spotlight-banner');
+    const countBadge = document.getElementById('spotlight-count');
 
-    spotlightBanner.classList.toggle('is-visible', spotlightedIds.length > 0);
-    spotlightCount.textContent = `${spotlightedIds.length} selected`;
-    spotlightSummary.textContent = spotlightedIds.length > 0
-      ? `${spotlightedIds.length} ${spotlightedIds.length === 1 ? 'business is' : 'businesses are'} ready to appear on the route map.`
-      : 'Choose businesses to keep them visible while routing.';
+    // Update banner visibility
+    if (spotlightedIds.length > 0) {
+      banner.style.display = 'flex';
+      countBadge.textContent = `${spotlightedIds.length} selected`;
+    } else {
+      banner.style.display = 'none';
+    }
 
-    businessesContainer.querySelectorAll('.business-card').forEach((card) => {
-      const businessId = Number(card.dataset.businessId);
-      const button = card.querySelector('[data-spotlight-id]');
-      const isSpotlighted = spotlightedIds.includes(businessId);
-
-      card.classList.toggle('spotlighted', isSpotlighted);
-
-      if (button) {
-        button.classList.toggle('is-active', isSpotlighted);
-        button.setAttribute('aria-pressed', isSpotlighted ? 'true' : 'false');
+    // Update card states
+    document.querySelectorAll('.business-card').forEach(card => {
+      const businessId = parseInt(card.dataset.businessId);
+      const spotlightBtn = card.querySelector('.spotlight-btn');
+      
+      if (spotlightedIds.includes(businessId)) {
+        card.classList.add('spotlighted');
+        spotlightBtn.classList.add('active');
+      } else {
+        card.classList.remove('spotlighted');
+        spotlightBtn.classList.remove('active');
       }
     });
   }
 
-  async function renderBusinesses() {
-    businesses = await fetchBusinesses();
-    updateStats();
-
-    if (!businesses.length) {
-      businessesContainer.innerHTML = '<div class=\'business-empty\'>No businesses are available right now.</div>';
-      return;
-    }
-
-    businessesContainer.innerHTML = businesses.map(renderBusinessCard).join('');
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', () => {
     updateSpotlightUI();
-  }
-
-  function navigateToBusiness(address) {
-    const baseUrl = getBaseUrl();
-    window.location.href = `${baseUrl}/route/?destination=${encodeURIComponent(address)}`;
-  }
-
-  businessesContainer.addEventListener('click', async (event) => {
-    const spotlightButton = event.target.closest('[data-spotlight-id]');
-    if (spotlightButton) {
-      const businessId = Number(spotlightButton.dataset.spotlightId);
-      await toggleSpotlight(businessId);
-      updateSpotlightUI();
-      return;
-    }
-
-    const navigateButton = event.target.closest('[data-navigate-address]');
-    if (navigateButton) {
-      navigateToBusiness(navigateButton.dataset.navigateAddress || 'San Diego, CA');
-    }
   });
 
-  document.addEventListener('DOMContentLoaded', renderBusinesses);
-
-  window.addEventListener('storage', (event) => {
-    if (event.key === SPOTLIGHT_STORAGE_KEY) {
+  // Listen for spotlight changes from other tabs/pages
+  window.addEventListener('storage', (e) => {
+    if (e.key === SPOTLIGHT_STORAGE_KEY) {
       updateSpotlightUI();
     }
   });
 
-  window.addEventListener('businessSpotlightChanged', updateSpotlightUI);
+  // Listen for custom spotlight change events
+  window.addEventListener('businessSpotlightChanged', () => {
+    updateSpotlightUI();
+  });
 </script>

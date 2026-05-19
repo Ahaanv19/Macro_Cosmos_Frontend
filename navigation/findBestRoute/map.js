@@ -1,16 +1,10 @@
 import { pythonURI, fetchOptions } from '../../assets/js/api/config.js';
-import {
-  createBusinessMarkerIcon,
-  createBusinessPopupContent,
-  fetchBusinesses,
-  getCategoryEmoji,
-  getSpotlightedBusinessIds,
-} from '../../assets/js/api/businesses.js';
 import polyline from 'https://cdn.skypack.dev/@mapbox/polyline';
 
 const apiUrl = `${pythonURI}/api/get_routes`;
 const routeUsageUrl = `${pythonURI}/api/subscription/route-usage`;
 const incidentsUrl = `${pythonURI}/api/incidents`;
+const businessesUrl = `${pythonURI}/api/businesses`;
 
 // Spotlight storage key
 const SPOTLIGHT_STORAGE_KEY = 'sd_auto_spotlighted_businesses';
@@ -249,9 +243,151 @@ setInterval(loadIncidentsOnMap, 5 * 60 * 1000);
 let businessMarkers = [];
 let businessesData = [];
 
+// Default business data (coordinates for San Diego area businesses)
+const defaultBusinesses = [
+  {
+    id: 1,
+    name: "ActiveMed Integrative Health Center",
+    description: "We believe in a collaborative approach to healthcare. We offer acupuncture, massage therapy, functional medicine, physical therapy, and axon therapy.",
+    address: "11588 Via Rancho San Diego, Suite 101, El Cajon, CA 92019",
+    website: "https://activemedhealth.com/",
+    category: "Healthcare",
+    coordinates: { lat: 32.7914, lng: -116.9259 }
+  },
+  {
+    id: 2,
+    name: "Digital One Printing",
+    description: "Digital One Printing is your premier one-stop Poway printshop that offers a wide range of services.",
+    address: "12630 Poway Rd, Poway, CA 92064",
+    website: "https://d1printing.net/",
+    category: "Printing Services",
+    coordinates: { lat: 32.9579, lng: -117.0287 }
+  }
+];
+
+// Get spotlighted business IDs from localStorage
+function getSpotlightedBusinessIds() {
+  try {
+    const stored = localStorage.getItem(SPOTLIGHT_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
+
+// Get category emoji for business marker
+function getCategoryEmoji(category) {
+  const emojis = {
+    'Healthcare': '🏥',
+    'Health': '🏥',
+    'Medical': '🏥',
+    'Printing Services': '🖨️',
+    'Print': '🖨️',
+    'Restaurant': '🍽️',
+    'Food': '🍽️',
+    'Cafe': '☕',
+    'Coffee': '☕',
+    'Shopping': '🛍️',
+    'Retail': '🛍️',
+    'Automotive': '🚗',
+    'Auto': '🚗',
+    'Gym': '💪',
+    'Fitness': '💪',
+    'Entertainment': '🎭',
+    'Hotel': '🏨',
+    'Bank': '🏦',
+    'Finance': '🏦',
+    'Education': '📚',
+    'School': '📚',
+    'Gas Station': '⛽',
+    'Pharmacy': '💊',
+    'Grocery': '🛒',
+    'default': '🏢'
+  };
+  
+  if (!category) return emojis.default;
+  
+  for (const [key, emoji] of Object.entries(emojis)) {
+    if (category.toLowerCase().includes(key.toLowerCase())) {
+      return emoji;
+    }
+  }
+  
+  return emojis.default;
+}
+
 // Create business marker icon
 function getBusinessMarkerIcon(business, isHighlighted = true) {
-  return L.divIcon(createBusinessMarkerIcon(business, isHighlighted));
+  const emoji = getCategoryEmoji(business.category);
+  const iconSize = isHighlighted ? 44 : 36;
+  
+  return L.divIcon({
+    className: 'business-div-icon',
+    html: `
+      <div style="
+        width: ${iconSize}px;
+        height: ${iconSize}px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5), 0 0 20px rgba(16, 185, 129, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: ${isHighlighted ? '20px' : '16px'};
+        cursor: pointer;
+        animation: business-pulse 2s infinite;
+      ">
+        ${emoji}
+      </div>
+      <style>
+        @keyframes business-pulse {
+          0%, 100% { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5), 0 0 20px rgba(16, 185, 129, 0.3); }
+          50% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.7), 0 0 30px rgba(16, 185, 129, 0.5); }
+        }
+      </style>
+    `,
+    iconSize: [iconSize, iconSize],
+    iconAnchor: [iconSize / 2, iconSize / 2],
+    popupAnchor: [0, -iconSize / 2]
+  });
+}
+
+// Create popup content for business marker
+function createBusinessPopupContent(business) {
+  const emoji = getCategoryEmoji(business.category);
+  return `
+    <div style="min-width: 200px; max-width: 280px;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span style="font-size: 24px;">${emoji}</span>
+        <strong style="color: #1e293b; font-size: 14px; line-height: 1.3;">${business.name}</strong>
+      </div>
+      <div style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1)); border-radius: 6px; margin-bottom: 8px;">
+        <span style="font-size: 10px;">⭐</span>
+        <span style="font-size: 11px; font-weight: 600; color: #10b981;">Spotlighted</span>
+      </div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 8px;">
+        <span style="display: flex; align-items: flex-start; gap: 4px;">
+          📍 ${business.address || 'San Diego, CA'}
+        </span>
+      </div>
+      ${business.description ? `
+        <p style="font-size: 12px; color: #475569; margin: 0 0 10px; line-height: 1.4; max-height: 60px; overflow: hidden;">
+          ${business.description.substring(0, 100)}${business.description.length > 100 ? '...' : ''}
+        </p>
+      ` : ''}
+      <div style="display: flex; gap: 8px;">
+        <a href="${business.website}" target="_blank" 
+           style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 8px 12px; background: linear-gradient(135deg, #0066cc 0%, #004d99 100%); color: white; border-radius: 8px; font-size: 12px; font-weight: 600; text-decoration: none;">
+          Visit Site
+        </a>
+        <button onclick="window.setRouteDestination && window.setRouteDestination('${(business.address || business.name).replace(/'/g, "\\'")}')"
+                style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 8px 12px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 8px; font-size: 12px; font-weight: 600; border: none; cursor: pointer;">
+          🧭 Navigate
+        </button>
+      </div>
+    </div>
+  `;
 }
 
 // Load and display spotlighted businesses on map
@@ -268,7 +404,16 @@ async function loadSpotlightedBusinessesOnMap() {
     return;
   }
   
-  const businesses = await fetchBusinesses();
+  // Try to fetch businesses from API, fallback to defaults
+  let businesses = defaultBusinesses;
+  try {
+    const response = await fetch(businessesUrl, fetchOptions);
+    if (response.ok) {
+      businesses = await response.json();
+    }
+  } catch (err) {
+    console.log('Using default business data');
+  }
   
   // Filter to only spotlighted businesses
   const spotlightedBusinesses = businesses.filter(b => spotlightedIds.includes(b.id));
