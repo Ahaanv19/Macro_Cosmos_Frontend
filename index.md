@@ -895,7 +895,7 @@ menu: nav/home.html
               Join thousands of San Diegans using SD Auto for their daily commute. Start optimizing your routes today.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="{{site.baseurl}}/login/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+              <a href="{{site.baseurl}}/login" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-2xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-105 transition-all">
                 <span>Get Started Free</span>
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
