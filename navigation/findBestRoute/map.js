@@ -1,4 +1,4 @@
-import { pythonURI, fetchOptions } from '../../assets/js/api/config.js';
+import { pythonURI, fetchOptions, escapeHTML, describeHttpError } from '../../assets/js/api/config.js';
 import {
   createBusinessMarkerIcon,
   createBusinessPopupContent,
@@ -108,9 +108,9 @@ async function loadIncidentsOnMap() {
           
           marker.bindPopup(`
             <div style="min-width: 150px;">
-              <strong style="color: #ef4444;">${incident.type}</strong><br>
-              <span style="color: #64748b; font-size: 12px;">📍 ${incident.location}</span>
-              ${incident.details ? `<br><span style="font-size: 12px; color: #475569;">${incident.details}</span>` : ''}
+              <strong style="color: #ef4444;">${escapeHTML(incident.type)}</strong><br>
+              <span style="color: #64748b; font-size: 12px;">📍 ${escapeHTML(incident.location)}</span>
+              ${incident.details ? `<br><span style="font-size: 12px; color: #475569;">${escapeHTML(incident.details)}</span>` : ''}
             </div>
           `);
           
@@ -163,9 +163,9 @@ function showHazardWarning(hazards, onContinue, onReroute) {
     <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(239, 68, 68, 0.1); border-radius: 10px; margin-bottom: 8px;">
       <span style="font-size: 24px;">${getHazardEmoji(h.type)}</span>
       <div>
-        <div style="font-weight: 600; color: #fef2f2;">${h.type}</div>
-        <div style="font-size: 12px; color: #fca5a5;">📍 ${h.location}</div>
-        <div style="font-size: 11px; color: #f87171;">~${h.distanceFromRoute}m from your route</div>
+        <div style="font-weight: 600; color: #fef2f2;">${escapeHTML(h.type)}</div>
+        <div style="font-size: 12px; color: #fca5a5;">📍 ${escapeHTML(h.location)}</div>
+        <div style="font-size: 11px; color: #f87171;">~${escapeHTML(h.distanceFromRoute)}m from your route</div>
       </div>
     </div>
   `).join('');
@@ -359,7 +359,7 @@ function updateBusinessLegend(show) {
         itemsContainer.innerHTML = businessesData.map(b => `
           <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #166534;">
             <span style="width: 24px; height: 24px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);">${getCategoryEmoji(b.category)}</span>
-            ${b.name}
+            ${escapeHTML(b.name)}
           </span>
         `).join('');
       }
@@ -369,9 +369,13 @@ function updateBusinessLegend(show) {
 
 // Set destination from business popup
 window.setRouteDestination = function(address) {
+  // The value arrives URI-encoded from the popup (see businesses.js) to keep
+  // it safe inside the inline handler; decode it back to a plain string here.
+  let decoded = address;
+  try { decoded = decodeURIComponent(address); } catch (e) { /* keep raw */ }
   const destinationInput = document.getElementById('destination');
   if (destinationInput) {
-    destinationInput.value = address;
+    destinationInput.value = decoded;
     destinationInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
     destinationInput.focus();
     
@@ -798,12 +802,23 @@ if (originParam && destinationParam) {
 }
 
 document.getElementById('fetch_routes_btn').addEventListener('click', async () => {
-  const origin = document.getElementById('origin').value;
-  const destination = document.getElementById('destination').value;
+  // Client-side validation mirroring the backend (origin/destination required,
+  // max 200 chars, mode restricted). Prevents sending requests the API rejects.
+  const origin = document.getElementById('origin').value.trim();
+  const destination = document.getElementById('destination').value.trim();
   const mode = document.getElementById('mode').value || 'driving';
+  const ALLOWED_MODES = ['driving', 'walking', 'bicycling', 'transit'];
 
   if (!origin || !destination) {
     alert('Please enter both origin and destination.');
+    return;
+  }
+  if (origin.length > 200 || destination.length > 200) {
+    alert('Origin and destination must be 200 characters or fewer.');
+    return;
+  }
+  if (!ALLOWED_MODES.includes(mode)) {
+    alert('Please choose a valid travel mode.');
     return;
   }
 
@@ -822,11 +837,24 @@ document.getElementById('fetch_routes_btn').addEventListener('click', async () =
       return;
     }
 
-    // Handle 429 Rate Limit - show upgrade modal
+    // Handle 403 Forbidden
+    if (response.status === 403) {
+      alert(describeHttpError(response));
+      return;
+    }
+
+    // Handle 429 Rate Limit. This can be either the daily route-limit
+    // (JSON with limit/tier info -> upgrade modal) or the edge rate-limiter
+    // (generic throttling -> friendly message). Parse defensively.
     if (response.status === 429) {
-      const limitData = await response.json();
-      showLimitReachedModal(limitData);
-      updateRouteUsageDisplay();  // Refresh the usage display
+      let limitData = null;
+      try { limitData = await response.json(); } catch (e) { /* non-JSON body */ }
+      if (limitData && (limitData.limit !== undefined || limitData.tier !== undefined)) {
+        showLimitReachedModal(limitData);
+        updateRouteUsageDisplay();
+      } else {
+        alert(describeHttpError(response));
+      }
       return;
     }
 
@@ -835,7 +863,7 @@ document.getElementById('fetch_routes_btn').addEventListener('click', async () =
     resultDiv.innerHTML = '';
 
     if (!Array.isArray(routes)) {
-      resultDiv.innerHTML = `<p>Error: ${routes.error || 'No routes found'}</p>`;
+      resultDiv.innerHTML = `<p>Error: ${escapeHTML(routes.error || 'No routes found')}</p>`;
       return;
     }
 
@@ -864,8 +892,8 @@ document.getElementById('fetch_routes_btn').addEventListener('click', async () =
       header.innerHTML = `
         <h4 class="route-title">
           <span class="route-badge">${idx === 0 ? '⭐ Recommended' : `Route ${idx + 1}`}</span>
-          <span class="route-distance">${route.total_distance}</span>
-          <span class="route-duration">Est. ${route.traffic_adjusted_duration || route.total_duration}</span>
+          <span class="route-distance">${escapeHTML(route.total_distance)}</span>
+          <span class="route-duration">Est. ${escapeHTML(route.traffic_adjusted_duration || route.total_duration)}</span>
         </h4>
       `;
       resultDiv.appendChild(header);
@@ -884,8 +912,8 @@ document.getElementById('fetch_routes_btn').addEventListener('click', async () =
             <span class="step-number-badge">${stepIdx + 1}</span>
           </div>
           <div class="step-content">
-            <span class="step-instruction">${step.instruction}</span>
-            <span class="step-meta">${step.distance} • ${step.duration}</span>
+            <span class="step-instruction">${escapeHTML(step.instruction)}</span>
+            <span class="step-meta">${escapeHTML(step.distance)} • ${escapeHTML(step.duration)}</span>
           </div>
         `;
         ul.appendChild(li);

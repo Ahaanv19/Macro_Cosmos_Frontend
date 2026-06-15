@@ -3,7 +3,7 @@
  * Handles local business data and spotlight functionality for route integration
  */
 
-import { pythonURI, fetchOptions } from './config.js';
+import { pythonURI, fetchOptions, escapeHTML, safeUrl } from './config.js';
 
 // API endpoints
 export const businessesUrl = `${pythonURI}/api/businesses`;
@@ -321,12 +321,24 @@ export function getCategoryEmoji(category) {
  * Generate popup content for business marker
  */
 export function createBusinessPopupContent(business) {
-  const destination = (business.address || business.name || '').replace(/'/g, "\\'");
+  // URI-encode (and escape the single quote) so the value is safe inside the
+  // single-quoted JS string in the onclick handler. setRouteDestination decodes it.
+  const destination = encodeURIComponent(business.address || business.name || '').replace(/'/g, '%27');
+  // All free-text fields below come from the API and may be user-submitted,
+  // so every interpolated value is HTML-escaped to prevent stored XSS.
+  const name = escapeHTML(business.name);
+  const category = escapeHTML(business.category || 'Local business');
+  const neighborhood = escapeHTML(business.neighborhood);
+  const address = escapeHTML(business.address || 'San Diego, CA');
+  const website = safeUrl(business.website);
+  const description = business.description
+    ? escapeHTML(business.description.substring(0, 120)) + (business.description.length > 120 ? '...' : '')
+    : '';
   const reviewMetric = business.review?.metric
     ? `
       <div style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; margin-bottom: 10px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.1)); border-radius: 999px; font-size: 11px; font-weight: 600; color: #0f766e;">
         <span>★</span>
-        <span>${business.review.metric}</span>
+        <span>${escapeHTML(business.review.metric)}</span>
       </div>
     `
     : '';
@@ -336,31 +348,31 @@ export function createBusinessPopupContent(business) {
       <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
         <span style="font-size: 24px;">${getCategoryEmoji(business.category)}</span>
         <div>
-          <strong style="display: block; color: #1e293b; font-size: 14px; line-height: 1.3; margin-bottom: 3px;">${business.name}</strong>
+          <strong style="display: block; color: #1e293b; font-size: 14px; line-height: 1.3; margin-bottom: 3px;">${name}</strong>
           <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #64748b;">
-            <span>${business.category || 'Local business'}</span>
-            ${business.neighborhood ? `<span>• ${business.neighborhood}</span>` : ''}
+            <span>${category}</span>
+            ${business.neighborhood ? `<span>• ${neighborhood}</span>` : ''}
           </span>
         </div>
       </div>
       ${reviewMetric}
       <div style="font-size: 12px; color: #64748b; margin-bottom: 8px;">
         <span style="display: flex; align-items: flex-start; gap: 4px;">
-          📍 ${business.address || 'San Diego, CA'}
+          📍 ${address}
         </span>
       </div>
       ${business.description ? `
         <p style="font-size: 12px; color: #475569; margin: 0 0 10px; line-height: 1.4; max-height: 60px; overflow: hidden;">
-          ${business.description.substring(0, 120)}${business.description.length > 120 ? '...' : ''}
+          ${description}
         </p>
       ` : ''}
       ${business.review?.summary ? `
         <p style="font-size: 12px; color: #0f766e; margin: 0 0 10px; line-height: 1.45;">
-          ${business.review.summary}
+          ${escapeHTML(business.review.summary)}
         </p>
       ` : ''}
       <div style="display: flex; gap: 8px;">
-        <a href="${business.website}" target="_blank"
+        <a href="${website}" target="_blank" rel="noopener noreferrer"
            style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 8px 12px; background: linear-gradient(135deg, #0066cc 0%, #004d99 100%); color: white; border-radius: 8px; font-size: 12px; font-weight: 600; text-decoration: none;">
           Visit Site
         </a>

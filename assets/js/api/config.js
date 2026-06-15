@@ -25,6 +25,54 @@ export const fetchOptions = {
         'X-Origin': 'client' // New custom header to identify source
     },
 };
+
+/**
+ * Escape untrusted text before inserting it into HTML via innerHTML.
+ * Use this for ANY value that originates from the API or user input.
+ * For attribute contexts, this also neutralizes quotes.
+ */
+export function escapeHTML(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+/**
+ * Return a safe URL or '#': only allows http(s)/mailto/tel, blocking
+ * javascript: and data: URLs that could execute script.
+ */
+export function safeUrl(value) {
+    if (!value) return '#';
+    const url = String(value).trim();
+    if (/^(https?:|mailto:|tel:)/i.test(url)) return escapeHTML(url);
+    if (/^\//.test(url)) return escapeHTML(url); // site-relative
+    return '#';
+}
+
+/**
+ * Map a non-OK HTTP response to a friendly user-facing message.
+ * Centralizes 401 (auth), 403 (forbidden), 429 (rate limited) handling.
+ * Returns the message string, or null if the response was OK.
+ */
+export function describeHttpError(response) {
+    if (response.ok) return null;
+    switch (response.status) {
+        case 401:
+            return 'Your session has expired. Please log in again.';
+        case 403:
+            return 'You do not have permission to perform this action.';
+        case 429:
+            return 'Too many requests — please slow down and try again in a moment.';
+        case 503:
+            return 'This service is temporarily unavailable. Please try again later.';
+        default:
+            return `Request failed (error ${response.status}). Please try again.`;
+    }
+}
 // User Login Function 
 export function login(options) {
         // Modify the options to use the POST method and include the request body.
@@ -43,8 +91,9 @@ export function login(options) {
         .then(response => {
                 // Trap error response from Web API
                 if (!response.ok) {
-                        const errorMsg = 'Login error: ' + response.status;
-                        console.log(errorMsg);
+                        // 429 (rate limited) is likely here due to login throttling.
+                        const errorMsg = describeHttpError(response) || ('Login error: ' + response.status);
+                        console.log('Login error: ' + response.status);
                         document.getElementById(options.message).textContent = errorMsg;
                         return;
                 }

@@ -4,6 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Content Security Policy (XSS / clickjacking defense).
+       Permissive over HTTPS so the CDNs the site relies on keep working
+       (Tailwind, Alpine, Chart.js, Leaflet, fonts, the backend API), while
+       blocking plugins (object-src), base-tag hijacking (base-uri) and framing
+       (frame-ancestors). Untrusted data is also escaped in JS before DOM insert. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https:; font-src 'self' data: https:; connect-src 'self' https: http://localhost:8888 http://127.0.0.1:8888; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'">
+
+  <!-- DOMPurify for sanitizing any rich HTML before DOM insertion -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.9/dist/purify.min.js"></script>
+
   <title>{{ page.title | default: "SD Auto" }} | City of San Diego</title>
 
   <!-- Tailwind CSS -->
