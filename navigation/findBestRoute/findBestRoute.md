@@ -8,7 +8,7 @@ nav: true
 
 <!-- Page-specific stylesheets/libraries (kept in-body because the post layout already owns <head>) -->
 <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/navigation/findBestRoute/map.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 
 <style>
 /* This file was previously corrupted (duplicated tokens / broken front matter). */
@@ -1036,7 +1036,9 @@ nav: true
 
 <!-- External libs -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<!-- Leaflet-compatibility adapter over MapLibre GL (defines global L) -->
+<script src="{{site.baseurl}}/assets/js/maplibre-leaflet-adapter.js"></script>
 
 <!-- Your existing route logic (must remain module) -->
 <script type="module" src="{{site.baseurl}}/assets/js/api/config.js"></script>

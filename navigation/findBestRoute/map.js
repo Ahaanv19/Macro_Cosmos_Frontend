@@ -29,6 +29,10 @@ function getBaseUrl() {
   return '/SD_Auto_Frontend'; // Hardcoded fallback
 }
 
+// Mapping engine: MapLibre GL (WebGL), via the shared Leaflet-compatibility
+// adapter loaded on the page (assets/js/maplibre-leaflet-adapter.js), which
+// defines the global `L`. All map calls below are unchanged from the Leaflet
+// implementation; only the engine underneath differs.
 const map = L.map('map').setView([32.7157, -117.1611], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors',

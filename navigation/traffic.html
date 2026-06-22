@@ -6,8 +6,8 @@ permalink: /hazard/
 nav: true
 ---
 
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<!-- MapLibre GL CSS -->
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 
 <style>
   .access-control-overlay {
@@ -281,7 +281,8 @@ nav: true
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   }
 
-  .leaflet-popup-content {
+  .leaflet-popup-content,
+  .maplibregl-popup-content {
     margin: 12px 16px;
   }
 
@@ -414,8 +415,9 @@ nav: true
 
 </div><!-- End main-content -->
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- MapLibre GL JS + Leaflet-compatibility adapter (defines global L) -->
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="{{site.baseurl}}/assets/js/maplibre-leaflet-adapter.js"></script>
 
 <script type="module">
 import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';

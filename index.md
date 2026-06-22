@@ -38,7 +38,7 @@ menu: nav/home.html
   <link rel="dns-prefetch" href="https://unpkg.com">
 
   <!-- External Stylesheets -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 
   <!-- Page Styles -->
   <style>
@@ -561,7 +561,9 @@ menu: nav/home.html
   </style>
 
   <!-- External Scripts -->
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <!-- Leaflet-compatibility adapter over MapLibre GL (defines global L) -->
+  <script src="{{site.baseurl}}/assets/js/maplibre-leaflet-adapter.js"></script>
 </head>
 
 <body>
