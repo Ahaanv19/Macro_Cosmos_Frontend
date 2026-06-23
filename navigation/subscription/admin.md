@@ -6,7 +6,22 @@ search_exclude: true
 menu: nav/home.html
 ---
 
-<div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+<!-- Dark-themed dashboard in both site modes; override base .site-main typography
+     so headings stay light and inputs stay dark regardless of light/dark mode. -->
+<style>
+  #admin-dashboard h1, #admin-dashboard h2, #admin-dashboard h3 { color: #f8fafc; }
+  #admin-dashboard input,
+  #admin-dashboard textarea,
+  #admin-dashboard select {
+    background: rgba(15, 23, 42, 0.72);
+    color: #e2e8f0;
+    border-color: rgba(148, 163, 184, 0.18);
+  }
+  #admin-dashboard input::placeholder,
+  #admin-dashboard textarea::placeholder { color: #64748b; }
+</style>
+
+<div id="admin-dashboard" class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 px-4 sm:px-6 lg:px-8">
   <div class="max-w-6xl mx-auto">
     
     <!-- Loading State -->
@@ -78,6 +93,9 @@ menu: nav/home.html
         <button onclick="switchTab('all')" id="tab-all" class="px-4 py-2 rounded-lg font-medium transition-colors bg-gray-700 text-gray-400 hover:text-white">
           All Users
         </button>
+        <button onclick="switchTab('businesses')" id="tab-businesses" class="px-4 py-2 rounded-lg font-medium transition-colors bg-gray-700 text-gray-400 hover:text-white">
+          Business Submissions
+        </button>
       </div>
       
       <!-- Pending Payments Section -->
@@ -124,6 +142,24 @@ menu: nav/home.html
         </div>
         
         <div id="all-list" class="divide-y divide-gray-700">
+          <div class="p-8 text-center text-gray-500">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Business Submissions Section -->
+      <div id="section-businesses" class="hidden bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700 overflow-hidden">
+        <div class="p-4 border-b border-gray-700 flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <h2 class="text-lg font-bold text-white">Business Submissions</h2>
+            <p class="text-gray-400 text-sm">Review listings submitted by business accounts. Approved listings appear in Local Businesses.</p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="filterBusinesses('pending')" id="bizfilter-pending" class="px-3 py-1.5 rounded-lg text-sm font-medium bg-yellow-500/20 text-yellow-400">Pending</button>
+            <button onclick="filterBusinesses('approved')" id="bizfilter-approved" class="px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-700 text-gray-400 hover:text-white">Approved</button>
+            <button onclick="filterBusinesses('rejected')" id="bizfilter-rejected" class="px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-700 text-gray-400 hover:text-white">Rejected</button>
+          </div>
+        </div>
+        <div id="businesses-list" class="divide-y divide-gray-700">
           <div class="p-8 text-center text-gray-500">Loading...</div>
         </div>
       </div>
@@ -212,9 +248,22 @@ menu: nav/home.html
 
 <script type="module">
   import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+
+  // Defined locally (not imported) so this page is immune to a stale cached
+  // config.js that predates these helpers.
+  const escapeHTML = (v) => v == null ? '' : String(v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  const safeUrl = (v) => {
+    if (!v) return '#';
+    const u = String(v).trim();
+    return /^(https?:|mailto:|tel:|\/)/i.test(u) ? escapeHTML(u) : '#';
+  };
   
   let currentUser = null;
   let pendingRequests = [];
+  let businessSubmissions = [];
+  let businessFilter = 'pending';
   let activeSubscriptions = [];
   let allUsers = [];
   let selectedRequest = null;
@@ -256,7 +305,8 @@ menu: nav/home.html
     await Promise.all([
       loadPendingRequests(),
       loadActiveSubscriptions(),
-      loadAllUsers()
+      loadAllUsers(),
+      loadBusinessSubmissions()
     ]);
     updateStats();
   }
@@ -477,9 +527,10 @@ menu: nav/home.html
   // Tab switching
   window.switchTab = function(tab) {
     // Update tab buttons
-    ['pending', 'active', 'all'].forEach(t => {
+    ['pending', 'active', 'all', 'businesses'].forEach(t => {
       const tabBtn = document.getElementById(`tab-${t}`);
       const section = document.getElementById(`section-${t}`);
+      if (!tabBtn || !section) return;
       
       if (t === tab) {
         tabBtn.className = 'px-4 py-2 rounded-lg font-medium transition-colors ' + 
@@ -490,6 +541,89 @@ menu: nav/home.html
         section.classList.add('hidden');
       }
     });
+  };
+
+  // ===== Business Submissions (community listings pending admin review) =====
+  async function loadBusinessSubmissions() {
+    try {
+      const response = await fetch(`${pythonURI}/api/business/submissions`, fetchOptions);
+      businessSubmissions = response.ok ? await response.json() : [];
+    } catch (e) {
+      console.error('Error loading business submissions:', e);
+      businessSubmissions = [];
+    }
+    renderBusinessSubmissions();
+  }
+
+  window.filterBusinesses = function(status) {
+    businessFilter = status;
+    ['pending', 'approved', 'rejected'].forEach(s => {
+      const btn = document.getElementById(`bizfilter-${s}`);
+      if (!btn) return;
+      if (s === status) {
+        btn.className = 'px-3 py-1.5 rounded-lg text-sm font-medium ' +
+          (s === 'pending' ? 'bg-yellow-500/20 text-yellow-400'
+            : s === 'approved' ? 'bg-green-500/20 text-green-400'
+            : 'bg-red-500/20 text-red-400');
+      } else {
+        btn.className = 'px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-700 text-gray-400 hover:text-white';
+      }
+    });
+    renderBusinessSubmissions();
+  };
+
+  function renderBusinessSubmissions() {
+    const container = document.getElementById('businesses-list');
+    if (!container) return;
+    const list = (businessSubmissions || []).filter(b => b.status === businessFilter);
+    if (list.length === 0) {
+      container.innerHTML = `<div class="p-8 text-center text-gray-500">No ${businessFilter} submissions</div>`;
+      return;
+    }
+    // All business fields are user-submitted -> escape before inserting.
+    container.innerHTML = list.map(b => `
+      <div class="p-4">
+        <div class="flex items-start justify-between gap-4">
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="text-white font-semibold">${escapeHTML(b.name)}</h3>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-gray-700 text-gray-300">${escapeHTML(b.category)}</span>
+            </div>
+            <p class="text-gray-400 text-sm mt-1">📍 ${escapeHTML(b.address)}</p>
+            ${b.description ? `<p class="text-gray-500 text-sm mt-1">${escapeHTML(b.description)}</p>` : ''}
+            ${b.website ? `<a href="${safeUrl(b.website)}" target="_blank" rel="noopener noreferrer" class="text-blue-400 text-sm mt-1 inline-block break-all">${escapeHTML(b.website)}</a>` : ''}
+            <p class="text-gray-600 text-xs mt-2">Submitted by ${escapeHTML(b.owner_uid || 'unknown')}</p>
+            ${b.review_note ? `<p class="text-red-400 text-xs mt-1">Note: ${escapeHTML(b.review_note)}</p>` : ''}
+          </div>
+          <div class="flex flex-col gap-2 shrink-0">
+            ${b.status === 'pending' ? `
+              <button onclick="approveBusiness(${b.id})" class="py-2 px-4 rounded-lg bg-green-600 text-white text-sm font-semibold hover:bg-green-700 transition-colors">Approve</button>
+              <button onclick="rejectBusiness(${b.id})" class="py-2 px-4 rounded-lg bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors">Reject</button>
+            ` : `<span class="text-xs px-3 py-1 rounded-full ${b.status === 'approved' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}">${escapeHTML((b.status || '').toUpperCase())}</span>`}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  window.approveBusiness = async function(id) {
+    try {
+      const response = await fetch(`${pythonURI}/api/business/submissions/${id}/approve`, { ...fetchOptions, method: 'POST' });
+      if (response.ok) { await loadBusinessSubmissions(); }
+      else alert('Could not approve submission.');
+    } catch (e) { alert('Error approving submission.'); }
+  };
+
+  window.rejectBusiness = async function(id) {
+    const note = prompt('Reason for rejecting (optional):');
+    if (note === null) return; // cancelled
+    try {
+      const response = await fetch(`${pythonURI}/api/business/submissions/${id}/reject`, {
+        ...fetchOptions, method: 'POST', body: JSON.stringify({ note: note || '' })
+      });
+      if (response.ok) { await loadBusinessSubmissions(); }
+      else alert('Could not reject submission.');
+    } catch (e) { alert('Error rejecting submission.'); }
   };
   
   // Approve Modal

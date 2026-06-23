@@ -73,12 +73,20 @@ search_exclude: true
         <div class="space-y-3">
           <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">New Account</p>
           <h2 class="text-3xl">Create Your Profile</h2>
-          <p class="text-sm leading-7 text-slate-600 dark:text-slate-300">Start with a free account, then upgrade only if you need premium features.</p>
+          <p id="signupIntro" class="text-sm leading-7 text-slate-600 dark:text-slate-300">Start with a free account, then upgrade only if you need premium features.</p>
         </div>
 
-        <form id="signupForm" onsubmit="signup(); return false;" class="mt-8 space-y-5">
+        <!-- Account type toggle: Personal vs Business (same login system, role differs) -->
+        <div class="mt-5 inline-flex rounded-2xl border border-slate-200 dark:border-slate-700 p-1 bg-slate-100 dark:bg-slate-800">
+          <button type="button" id="signup-mode-personal" onclick="setSignupMode('personal')"
+            class="px-4 py-1.5 rounded-xl text-sm font-semibold bg-white dark:bg-slate-950 text-slate-800 dark:text-white shadow">Personal</button>
+          <button type="button" id="signup-mode-business" onclick="setSignupMode('business')"
+            class="px-4 py-1.5 rounded-xl text-sm font-semibold text-slate-500 dark:text-slate-400">Business</button>
+        </div>
+
+        <form id="signupForm" onsubmit="signup(); return false;" class="mt-6 space-y-5">
           <div>
-            <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Name</label>
+            <label for="name" id="signupNameLabel" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Name</label>
             <input type="text" id="name" name="name" required autocomplete="name"
               class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-800 shadow-soft transition focus:outline-none dark:border-slate-700 dark:bg-slate-950/60 dark:text-slate-100" />
           </div>
@@ -121,33 +129,60 @@ search_exclude: true
     login(options);
   }
 
+  // Account type for signup: 'personal' (regular user) or 'business' (Business role).
+  let signupMode = 'personal';
+  window.setSignupMode = function(mode) {
+    signupMode = mode === 'business' ? 'business' : 'personal';
+    const active = 'px-4 py-1.5 rounded-xl text-sm font-semibold bg-white dark:bg-slate-950 text-slate-800 dark:text-white shadow';
+    const inactive = 'px-4 py-1.5 rounded-xl text-sm font-semibold text-slate-500 dark:text-slate-400';
+    const personalBtn = document.getElementById('signup-mode-personal');
+    const businessBtn = document.getElementById('signup-mode-business');
+    if (personalBtn) personalBtn.className = signupMode === 'personal' ? active : inactive;
+    if (businessBtn) businessBtn.className = signupMode === 'business' ? active : inactive;
+    const nameLabel = document.getElementById('signupNameLabel');
+    if (nameLabel) nameLabel.textContent = signupMode === 'business' ? 'Business Name' : 'Name';
+    const intro = document.getElementById('signupIntro');
+    if (intro) intro.textContent = signupMode === 'business'
+      ? 'Create a business account to submit your business for the Local Businesses directory (admin-approved).'
+      : 'Start with a free account, then upgrade only if you need premium features.';
+    const submitBtn = document.querySelector('#signupForm button[type="submit"]');
+    if (submitBtn) submitBtn.textContent = signupMode === 'business' ? 'Create Business Account' : 'Create Account';
+    const msg = document.getElementById('signupMessage');
+    if (msg) msg.textContent = '';
+  };
+
   window.signup = function() {
     const signupButton = document.querySelector("#signupForm button");
     signupButton.disabled = true;
     signupButton.style.backgroundColor = '#d3d3d3';
 
-    const signupOptions = {
-      URL: `${pythonURI}/api/user`,
-      method: "POST",
-      cache: "no-cache",
-      body: {
-        name: document.getElementById("name").value,
-        uid: document.getElementById("signupUid").value,
-        password: document.getElementById("signupPassword").value,
-      }
+    // Business accounts use the dedicated business-register endpoint (role set to
+    // "Business" server-side); personal accounts use the existing /api/user route.
+    const url = signupMode === 'business'
+      ? `${pythonURI}/api/business/register`
+      : `${pythonURI}/api/user`;
+    const body = {
+      name: document.getElementById("name").value,
+      uid: document.getElementById("signupUid").value,
+      password: document.getElementById("signupPassword").value,
     };
 
-    fetch(signupOptions.URL, {
-      method: signupOptions.method,
+    fetch(url, {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(signupOptions.body)
+      body: JSON.stringify(body)
     })
-    .then(response => {
-      if (!response.ok) throw new Error(`Signup failed: ${response.status}`);
-      return response.json();
+    .then(async response => {
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || data.message || `Signup failed: ${response.status}`);
+      return data;
     })
     .then(() => {
-      document.getElementById("signupMessage").textContent = "Signup successful!";
+      document.getElementById("signupMessage").textContent = signupMode === 'business'
+        ? "Business account created! Sign in, then submit your business at the Business portal."
+        : "Signup successful!";
+      signupButton.disabled = false;
+      signupButton.style.backgroundColor = '';
     })
     .catch(error => {
       document.getElementById("signupMessage").textContent = `Signup Error: ${error.message}`;

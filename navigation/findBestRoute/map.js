@@ -281,19 +281,24 @@ async function loadSpotlightedBusinessesOnMap() {
   // Add markers for spotlighted businesses
   for (const business of spotlightedBusinesses) {
     let coords = business.coordinates;
-    
-    // If no coordinates, try to geocode the address
-    if (!coords && business.address) {
-      coords = await geocodeLocation(business.address);
-      if (coords) {
-        business.coordinates = coords;
+
+    // Helper: a usable coordinate must have non-null lat AND lng.
+    const hasCoords = (c) => c && (c.lat ?? c.latitude) != null && (c.lng ?? c.lon ?? c.longitude) != null;
+
+    // If coordinates are missing OR null/blank (e.g. admin-approved community
+    // submissions that had no lat/lng), geocode the address instead.
+    if (!hasCoords(coords) && business.address) {
+      const geo = await geocodeLocation(business.address);
+      if (geo) {
+        coords = geo;
+        business.coordinates = geo;
       }
     }
-    
-    if (coords) {
-      const lat = coords.lat || coords.latitude;
-      const lng = coords.lng || coords.lon || coords.longitude;
-      
+
+    if (hasCoords(coords)) {
+      const lat = coords.lat ?? coords.latitude;
+      const lng = coords.lng ?? coords.lon ?? coords.longitude;
+
       const marker = L.marker([lat, lng], {
         icon: getBusinessMarkerIcon(business, true)
       }).addTo(map);
