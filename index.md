@@ -12,7 +12,7 @@ menu: nav/home.html
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Macro Cosmos - Smart City Navigation | City of San Diego</title>
+  <title>Macro Cosmos - Smart City Navigation | San Diego County</title>
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="Macro Cosmos - Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets. Built for efficiency, driven by data.">
@@ -625,7 +625,7 @@ menu: nav/home.html
           <div class="flex-1 text-center lg:text-left space-y-8 animate-fade-in">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary-200/70 dark:border-primary-800/60 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-semibold uppercase tracking-[0.18em]">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              City of San Diego · Smart Mobility Initiative
+              San Diego County · Smart Mobility Initiative
             </div>
 
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
