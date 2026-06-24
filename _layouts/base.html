@@ -1121,6 +1121,55 @@
       color: #94a3b8;
     }
 
+    /* ===== Blog / markdown post typography =====
+       Tailwind's preflight reset strips default heading sizes and list bullets,
+       which made markdown blog/doc posts render as flat "lumps of text". This
+       restores proper typography, scoped to rendered markdown only
+       (.post-content), so it never affects the app's Tailwind-built feature
+       pages (route finder, business portal, admin, etc.). Complements the
+       existing .post-content img/table rules below rather than overriding them. */
+    .site-main .post-content { font-size: 1.05rem; line-height: 1.75; color: #334155; }
+    .dark .site-main .post-content { color: #cbd5e1; }
+    .site-main .post-content h1 { font-size: 2.1rem; line-height: 1.15; margin: 2rem 0 1rem; font-weight: 700; }
+    .site-main .post-content h2 { font-size: 1.6rem; line-height: 1.2; margin: 1.9rem 0 0.9rem; font-weight: 700; }
+    .site-main .post-content h3 { font-size: 1.3rem; line-height: 1.25; margin: 1.5rem 0 0.7rem; font-weight: 600; }
+    .site-main .post-content h4 { font-size: 1.12rem; margin: 1.3rem 0 0.6rem; font-weight: 600; }
+    .site-main .post-content h5,
+    .site-main .post-content h6 { font-size: 1rem; margin: 1.1rem 0 0.5rem; font-weight: 600; }
+    .site-main .post-content p { margin: 0 0 1.1rem; }
+    .site-main .post-content ul,
+    .site-main .post-content ol { margin: 0 0 1.1rem; padding-left: 1.6rem; }
+    .site-main .post-content ul { list-style: disc; }
+    .site-main .post-content ol { list-style: decimal; }
+    .site-main .post-content li { margin: 0.35rem 0; }
+    .site-main .post-content li > ul,
+    .site-main .post-content li > ol { margin: 0.3rem 0; }
+    .site-main .post-content a { color: #0d6efd; text-decoration: underline; text-underline-offset: 2px; }
+    .dark .site-main .post-content a { color: #60a5fa; }
+    .site-main .post-content strong,
+    .site-main .post-content b { font-weight: 700; }
+    .site-main .post-content em,
+    .site-main .post-content i { font-style: italic; }
+    .site-main .post-content blockquote {
+      margin: 1.2rem 0; padding: 0.5rem 1.1rem; border-left: 4px solid #93c5fd;
+      background: rgba(148, 163, 184, 0.08); border-radius: 0 0.5rem 0.5rem 0; color: #475569;
+    }
+    .dark .site-main .post-content blockquote { color: #94a3b8; border-left-color: #3b82f6; }
+    .site-main .post-content code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em;
+      background: rgba(148, 163, 184, 0.16); padding: 0.15em 0.4em; border-radius: 0.35rem;
+    }
+    .site-main .post-content pre {
+      background: #0f172a; color: #e2e8f0; padding: 1rem 1.2rem; border-radius: 0.75rem;
+      overflow-x: auto; margin: 0 0 1.2rem;
+    }
+    .site-main .post-content pre code { background: none; padding: 0; color: inherit; font-size: 0.875rem; }
+    .site-main .post-content img { max-width: 100%; height: auto; margin: 1rem 0; }
+    .site-main .post-content hr { border: 0; border-top: 1px solid rgba(148, 163, 184, 0.3); margin: 2rem 0; }
+    .site-main .post-content th,
+    .site-main .post-content td { border: 1px solid rgba(148, 163, 184, 0.3); padding: 0.5rem 0.75rem; text-align: left; }
+    .site-main .post-content th { background: rgba(148, 163, 184, 0.12); font-weight: 600; }
+
     .gradient-text {
       background: none;
       background-clip: border-box;
