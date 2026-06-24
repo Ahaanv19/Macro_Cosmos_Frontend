@@ -1,9 +1,9 @@
 
 <section class="max-w-5xl mx-auto px-6 py-12 prose prose-lg dark:prose-invert">
-  <h1>About SD/Poway Auto </h1>
+  <h1>About Macro Cosmos </h1>
 
   <p>
-    <strong>SD/Poway Auto</strong> is a full-stack intelligent routing platform designed to enhance daily commutes
+    <strong>Macro Cosmos</strong> is a full-stack intelligent routing platform designed to enhance daily commutes
     in San Diego, California through real-time data, community reporting, and AI-driven route optimization.
     Our goal is to make transportation more efficient, reliable, and adaptive.
   </p>
@@ -83,7 +83,7 @@
     <li>Login Verfication, Verify your location to get approved for a login</li>
     <li>Once you get approved, create an account and login</li>
     <li>Use our features! Try out our find best route navagation system for your next trip, or customize your experience with Favorite Locations or Daily Routine. For Favorite Location, input common locations, and for Daily Routine, create a time table schedule for your day.</li>
-    <li>Report Hazards in Poway using the hazard reporting feature.</li>
+    <li>Report Hazards in San Diego using the hazard reporting feature.</li>
   </ul>
 
   <h2>Links</h2>
