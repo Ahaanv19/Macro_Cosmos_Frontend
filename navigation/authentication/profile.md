@@ -169,9 +169,10 @@ window.addPasskey = async function () {
         const beginR = await fetch(`${pythonURI}/api/webauthn/register/begin`, { ...fetchOptions, method: 'POST' });
         const options = await beginR.json();
         if (!beginR.ok) throw new Error(options.error || 'Could not start passkey setup');
+        const challengeToken = options.challengeToken; // stateless challenge (works cross-origin)
         const attestation = await startRegistration(options); // triggers the biometric/security-key prompt
         const compR = await fetch(`${pythonURI}/api/webauthn/register/complete`, {
-            ...fetchOptions, method: 'POST', body: JSON.stringify({ credential: attestation, name: 'Passkey' })
+            ...fetchOptions, method: 'POST', body: JSON.stringify({ credential: attestation, name: 'Passkey', challenge_token: challengeToken })
         });
         const data = await compR.json();
         if (!compR.ok) throw new Error(data.error || 'Passkey registration failed');

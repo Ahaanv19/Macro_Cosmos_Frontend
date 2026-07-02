@@ -140,8 +140,9 @@ search_exclude: true
       const beginR = await fetch(`${pythonURI}/api/webauthn/login/begin`, { ...fetchOptions, method: 'POST', body: JSON.stringify({ uid }) });
       const options = await beginR.json();
       if (!beginR.ok) throw new Error(options.error || 'No passkeys found for this account');
+      const challengeToken = options.challengeToken; // stateless challenge (works cross-origin)
       const assertion = await startAuthentication(options); // triggers the biometric prompt
-      const compR = await fetch(`${pythonURI}/api/webauthn/login/complete`, { ...fetchOptions, method: 'POST', body: JSON.stringify(assertion) });
+      const compR = await fetch(`${pythonURI}/api/webauthn/login/complete`, { ...fetchOptions, method: 'POST', body: JSON.stringify({ credential: assertion, challenge_token: challengeToken }) });
       const data = await compR.json();
       if (!compR.ok) throw new Error(data.error || 'Passkey login failed');
       window.location.href = '{{site.baseurl}}/profile';
