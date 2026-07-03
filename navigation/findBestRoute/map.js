@@ -18,15 +18,13 @@ const SPOTLIGHT_STORAGE_KEY = 'sd_auto_spotlighted_businesses';
 // Get the base URL from the page (set by Jekyll)
 function getBaseUrl() {
   const trigger = document.querySelector('.trigger');
-  if (trigger && trigger.getAttribute('data-baseurl')) {
-    return trigger.getAttribute('data-baseurl');
+  const attr = trigger && trigger.getAttribute('data-baseurl');
+  if (attr !== null && attr !== undefined) {
+    return attr; // Jekyll-provided baseurl (empty string on Netlify/local is valid)
   }
-  // Fallback: try to extract from current URL or use known baseurl
-  const pathMatch = window.location.pathname.match(/^(\/[^\/]+)/);
-  if (pathMatch && pathMatch[1] !== '/route') {
-    return pathMatch[1];
-  }
-  return '/Macro_Cosmos_Frontend'; // Hardcoded fallback
+  // Host-aware fallback: GitHub Pages serves under /Macro_Cosmos_Frontend;
+  // Netlify and localhost serve at the root.
+  return location.hostname.endsWith('github.io') ? '/Macro_Cosmos_Frontend' : '';
 }
 
 // Mapping engine: MapLibre GL (WebGL), via the shared Leaflet-compatibility

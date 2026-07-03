@@ -648,12 +648,9 @@ nav: true
   let businesses = [];
 
   function getBaseUrl() {
-    const pathMatch = window.location.pathname.match(/^(\/[^\/]+)/);
-    if (pathMatch && pathMatch[1] !== '/localbusinesses') {
-      return pathMatch[1];
-    }
-
-    return '/Macro_Cosmos_Frontend';
+    // Host-aware: GitHub Pages serves under /Macro_Cosmos_Frontend; Netlify and
+    // localhost serve at the root.
+    return location.hostname.endsWith('github.io') ? '/Macro_Cosmos_Frontend' : '';
   }
 
   function escapeHtml(value = '') {

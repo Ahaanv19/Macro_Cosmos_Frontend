@@ -1,0 +1,18 @@
+# Netlify build configuration.
+#
+# GitHub Pages serves this site under a sub-path (/Macro_Cosmos_Frontend, set as
+# `baseurl` in _config.yml). Netlify serves it at the domain ROOT
+# (https://macro-cosmos.netlify.app/), so every /Macro_Cosmos_Frontend/... link
+# would 404 here. We override baseurl to "" at build time — WITHOUT editing
+# _config.yml — so both deploys keep working:
+#   * GitHub Pages  -> baseurl "/Macro_Cosmos_Frontend" (from _config.yml)
+#   * Netlify       -> baseurl "" (from the --baseurl flag below)
+[build]
+  command = "bundle exec jekyll build --baseurl \"\""
+  publish = "_site"
+
+[build.environment]
+  JEKYLL_ENV = "production"
+
+# SPA-style fallback is NOT used (Jekyll emits real HTML per route), but a custom
+# 404 page is served automatically from 404.html if present.

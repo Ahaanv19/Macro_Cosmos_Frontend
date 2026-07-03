@@ -375,8 +375,8 @@ menu: nav/home.html
         body: JSON.stringify({
           plan: plan,
           billing_interval: billing,
-          success_url: `${window.location.origin}/Macro_Cosmos_Frontend/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${window.location.origin}/Macro_Cosmos_Frontend/subscription/cancel`
+          success_url: `${window.location.origin}{{site.baseurl}}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${window.location.origin}{{site.baseurl}}/subscription/cancel`
         })
       });
       
