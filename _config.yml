@@ -2,7 +2,12 @@ title: Macro Cosmos
 description: "An online program to find the best and most optimal route for traveling across California — San Diego County and the San Francisco Bay Area"
 owner_name: Ahaan Vaidyanathan
 github_username: Ahaanv19
-github_repo: "Macro_Cosmos_Frontend" 
+github_repo: "Macro_Cosmos_Frontend"
+# Explicit owner/repo so jekyll-github-metadata works on Netlify, where GitHub
+# repo context isn't auto-provided (GitHub Pages sets this automatically, so this
+# is a harmless no-op there). Without it the Netlify build fails with
+# "No repo name found. Specify using PAGES_REPO_NWO...".
+repository: "Ahaanv19/Macro_Cosmos_Frontend"
 baseurl: "/Macro_Cosmos_Frontend"
 future: true
 remote_theme: jekyll/minima
