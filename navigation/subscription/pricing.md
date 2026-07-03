@@ -96,7 +96,7 @@ menu: nav/home.html
     <div class="mx-auto mt-8 max-w-3xl text-center">
       <h1 class="pricing-title text-4xl font-bold tracking-tight md:text-6xl">Choose The Plan That Fits Your Commute</h1>
       <p class="pricing-copy mx-auto mt-5 max-w-2xl text-lg leading-8">
-        Upgrade only when you need more routing power. Every tier is designed around a clearer, more dependable San Diego travel workflow.
+        Upgrade only when you need more routing power. Every tier is designed around a clearer, more dependable California travel workflow.
       </p>
     </div>
 

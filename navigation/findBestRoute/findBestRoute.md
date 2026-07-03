@@ -874,8 +874,8 @@ nav: true
 <!-- TRAFFIC ANALYTICS DASHBOARD -->
 <div class="traffic-dashboard" id="traffic-dashboard">
   <div class="traffic-header">
-    <h3>📊 San Diego Traffic Analytics</h3>
-    <span class="data-source-badge"><span class="pulse-dot"></span>SD Open Data</span>
+    <h3>📊 California Traffic Analytics</h3>
+    <span class="data-source-badge"><span class="pulse-dot"></span>SD · SF · Alameda Open Data</span>
   </div>
 
   <div class="traffic-stats-row">
@@ -938,12 +938,12 @@ nav: true
 <div class="route-form">
   <h2>🗺️ Traffic-Aware Route Finder</h2>
   <p style="font-size: 15px; color: #64748b;">
-    Routes are dynamically adjusted using official San Diego traffic count data and real-time conditions.
+    Routes are dynamically adjusted using official San Diego, San Francisco, and Alameda traffic data and real-time conditions.
   </p>
 
   <div class="input-group">
     <label for="origin">📍 Origin</label>
-    <input type="text" id="origin" placeholder="Enter your starting point (e.g., Downtown San Diego)">
+    <input type="text" id="origin" placeholder="Enter your starting point (e.g., Downtown San Diego or Oakland)">
   </div>
   <div class="input-group">
     <label for="destination">🎯 Destination</label>

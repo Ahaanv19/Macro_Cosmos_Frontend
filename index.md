@@ -12,25 +12,25 @@ menu: nav/home.html
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Macro Cosmos - Smart City Navigation | San Diego County</title>
+  <title>Macro Cosmos - Smart City Navigation | San Diego &amp; the Bay Area</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Macro Cosmos - Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets. Built for efficiency, driven by data.">
-  <meta name="keywords" content="San Diego, navigation, traffic, route planning, smart city, Macro Cosmos">
+  <meta name="description" content="Macro Cosmos - Real-time traffic intelligence, optimized routing, and smart navigation designed for California streets across San Diego, San Francisco, and Alameda. Built for efficiency, driven by data.">
+  <meta name="keywords" content="San Diego, San Francisco, Oakland, Berkeley, Alameda, Bay Area, navigation, traffic, route planning, smart city, Macro Cosmos">
   <meta name="author" content="Ahaan Vaidyanathan">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahaanv19.github.io/Macro_Cosmos_Frontend/">
-  <meta property="og:title" content="Macro Cosmos - Smart City Navigation for San Diego">
-  <meta property="og:description" content="Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets.">
+  <meta property="og:title" content="Macro Cosmos - Smart City Navigation for San Diego &amp; the Bay Area">
+  <meta property="og:description" content="Real-time traffic intelligence, optimized routing, and smart navigation designed for California streets across San Diego, San Francisco, and Alameda.">
   <meta property="og:image" content="https://ahaanv19.github.io/Macro_Cosmos_Frontend/images/og-image.png">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://ahaanv19.github.io/Macro_Cosmos_Frontend/">
-  <meta name="twitter:title" content="Macro Cosmos - Smart City Navigation for San Diego">
-  <meta name="twitter:description" content="Real-time traffic intelligence, optimized routing, and smart navigation designed for San Diego's streets.">
+  <meta name="twitter:title" content="Macro Cosmos - Smart City Navigation for San Diego &amp; the Bay Area">
+  <meta name="twitter:description" content="Real-time traffic intelligence, optimized routing, and smart navigation designed for California streets across San Diego, San Francisco, and Alameda.">
   <meta name="twitter:image" content="https://ahaanv19.github.io/Macro_Cosmos_Frontend/images/og-image.png">
 
   <!-- Preconnect for Performance -->
@@ -625,7 +625,7 @@ menu: nav/home.html
           <div class="flex-1 text-center lg:text-left space-y-8 animate-fade-in">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary-200/70 dark:border-primary-800/60 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-semibold uppercase tracking-[0.18em]">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              San Diego County · Smart Mobility Initiative
+              San Diego &amp; the Bay Area · Smart Mobility Initiative
             </div>
 
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
@@ -635,7 +635,7 @@ menu: nav/home.html
             </h1>
 
             <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Macro Cosmos combines live traffic density, hazard awareness, and route-aware local business context in one calmer planning surface built for San Diego streets.
+              Macro Cosmos combines live traffic density, hazard awareness, and route-aware local business context in one calmer planning surface built for California streets — San Diego, San Francisco, and Alameda.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -658,7 +658,7 @@ menu: nav/home.html
                 <svg class="w-4 h-4 text-primary-600 dark:text-primary-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                City of San Diego Open Data Portal
+                San Diego, SF &amp; Alameda Open Data
               </div>
               <div class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 pt-4">
                 <svg class="w-4 h-4 text-primary-600 dark:text-primary-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -767,10 +767,10 @@ menu: nav/home.html
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Built for San Diego
+            Built for California
           </h2>
           <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Operational coverage drawn directly from the City of San Diego's open data network
+            Operational coverage drawn directly from San Diego, San Francisco, and Alameda open data networks
           </p>
         </div>
 
@@ -818,7 +818,7 @@ menu: nav/home.html
         </div>
 
         <p class="mt-8 text-center text-xs text-slate-400 dark:text-slate-500">
-          Source: <a href="https://data.sandiego.gov/" target="_blank" rel="noopener" class="underline decoration-dotted underline-offset-2 hover:text-primary-500">City of San Diego Open Data Portal</a> · Figures reflect current network coverage
+          Sources: <a href="https://data.sandiego.gov/" target="_blank" rel="noopener" class="underline decoration-dotted underline-offset-2 hover:text-primary-500">San Diego</a>, <a href="https://data.sfgov.org/" target="_blank" rel="noopener" class="underline decoration-dotted underline-offset-2 hover:text-primary-500">San Francisco</a> &amp; <a href="https://data.acgov.org/" target="_blank" rel="noopener" class="underline decoration-dotted underline-offset-2 hover:text-primary-500">Alameda</a> Open Data · Figures reflect current network coverage
         </p>
       </div>
     </section>
@@ -834,7 +834,7 @@ menu: nav/home.html
             Everything You Need for<br>Smarter Navigation
           </h2>
           <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Comprehensive tools designed to make your daily commute and travel around San Diego more efficient
+            Comprehensive tools designed to make your daily commute and travel around California more efficient
           </p>
         </div>
 
@@ -847,7 +847,7 @@ menu: nav/home.html
               </svg>
             </div>
             <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Traffic-Aware Routing</h3>
-            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Routes dynamically adjusted using real traffic data from San Diego's open data portal for accurate ETAs.</p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Routes dynamically adjusted using real traffic data from San Diego, San Francisco, and Alameda open data portals for accurate ETAs.</p>
           </div>
 
           <!-- Feature 2 -->
@@ -880,7 +880,7 @@ menu: nav/home.html
               </svg>
             </div>
             <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Hazard Reporting</h3>
-            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Report road hazards and help keep San Diego's streets safe for everyone.</p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Report road hazards and help keep California's streets safe for everyone.</p>
           </div>
 
           <!-- Feature 5 -->
@@ -891,7 +891,7 @@ menu: nav/home.html
               </svg>
             </div>
             <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Local Business Discovery</h3>
-            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Discover and support local San Diego businesses along your routes.</p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Discover and support local businesses along your routes.</p>
           </div>
 
           <!-- Feature 6 -->
@@ -913,7 +913,7 @@ menu: nav/home.html
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Your Location in San Diego
+            Your Location
           </h2>
           <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             Interactive map showing your current location. Enable location services to see real-time positioning.
@@ -968,7 +968,7 @@ menu: nav/home.html
             </button>
             <div class="faq-answer">
               <div class="faq-answer-content">
-                Macro Cosmos uses real-time traffic data from the City of San Diego's open data portal combined with advanced routing algorithms to calculate the fastest route based on current traffic conditions, road closures, and historical patterns.
+                Macro Cosmos uses real-time traffic data from the San Diego, San Francisco, and Alameda open data portals combined with advanced routing algorithms to calculate the fastest route based on current traffic conditions, road closures, and historical patterns.
               </div>
             </div>
           </div>
@@ -998,7 +998,7 @@ menu: nav/home.html
             </button>
             <div class="faq-answer">
               <div class="faq-answer-content">
-                Macro Cosmos is optimized for the entire San Diego metropolitan area, including all neighborhoods from La Jolla to Chula Vista, and from the coast to East County. Our traffic data covers all major highways and surface streets.
+                Macro Cosmos is optimized for San Diego County and the San Francisco Bay Area — including San Diego (La Jolla to Chula Vista, coast to East County), San Francisco, and Alameda County cities like Oakland and Berkeley. Our traffic data covers major highways and surface streets across all three regions.
               </div>
             </div>
           </div>
@@ -1013,7 +1013,7 @@ menu: nav/home.html
             </button>
             <div class="faq-answer">
               <div class="faq-answer-content">
-                Our traffic data is sourced directly from the City of San Diego's official traffic sensors and is updated in real-time. This official data ensures high accuracy for route planning and ETA calculations.
+                Our traffic data is sourced directly from the official open data portals of San Diego, San Francisco, and Alameda, and is updated in real-time. This official data ensures high accuracy for route planning and ETA calculations.
               </div>
             </div>
           </div>
