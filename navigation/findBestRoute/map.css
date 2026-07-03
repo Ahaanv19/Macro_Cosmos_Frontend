@@ -31,10 +31,10 @@
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border-radius: 28px;
   box-shadow: 
-    0 4px 6px -1px rgba(0, 102, 204, 0.05),
-    0 10px 15px -3px rgba(0, 102, 204, 0.08),
-    0 20px 25px -5px rgba(0, 102, 204, 0.05);
-  border: 1px solid rgba(0, 102, 204, 0.08);
+    0 4px 6px -1px rgba(10, 124, 194, 0.05),
+    0 10px 15px -3px rgba(10, 124, 194, 0.08),
+    0 20px 25px -5px rgba(10, 124, 194, 0.05);
+  border: 1px solid rgba(10, 124, 194, 0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -47,7 +47,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #0066cc, #06b6d4, #0066cc);
+  background: linear-gradient(90deg, #0a7cc2, #06b6d4, #0a7cc2);
   background-size: 200% 100%;
   animation: gradient-shift 3s ease infinite;
 }
@@ -60,16 +60,16 @@
 .route-form:hover {
   transform: translateY(-4px);
   box-shadow: 
-    0 10px 15px -3px rgba(0, 102, 204, 0.1),
-    0 20px 25px -5px rgba(0, 102, 204, 0.1),
-    0 25px 50px -12px rgba(0, 102, 204, 0.15);
+    0 10px 15px -3px rgba(10, 124, 194, 0.1),
+    0 20px 25px -5px rgba(10, 124, 194, 0.1),
+    0 25px 50px -12px rgba(10, 124, 194, 0.15);
 }
 
 .route-form h2 {
   font-size: 32px;
   font-weight: 800;
   text-align: center;
-  background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -97,7 +97,7 @@
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: #0066cc;
+  color: #0a7cc2;
   margin-bottom: 8px;
   letter-spacing: 0.025em;
 }
@@ -127,11 +127,11 @@
 
 .input-group input:focus,
 .input-group select:focus {
-  border-color: #0066cc;
+  border-color: #0a7cc2;
   background-color: #ffffff;
   box-shadow: 
-    0 0 0 4px rgba(0, 102, 204, 0.1),
-    0 4px 12px rgba(0, 102, 204, 0.08);
+    0 0 0 4px rgba(10, 124, 194, 0.1),
+    0 4px 12px rgba(10, 124, 194, 0.08);
   outline: none;
 }
 
@@ -139,7 +139,7 @@
 button#fetch_routes_btn {
   width: 100%;
   padding: 18px 32px;
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #075e9a 100%);
   color: white;
   font-weight: 700;
   border: none;
@@ -165,11 +165,11 @@ button#fetch_routes_btn::before {
 }
 
 button#fetch_routes_btn:hover {
-  background: linear-gradient(135deg, #0052a3 0%, #004080 100%);
+  background: linear-gradient(135deg, #075e9a 0%, #004080 100%);
   transform: translateY(-2px);
   box-shadow: 
-    0 10px 20px -5px rgba(0, 102, 204, 0.4),
-    0 4px 8px -2px rgba(0, 102, 204, 0.2);
+    0 10px 20px -5px rgba(10, 124, 194, 0.4),
+    0 4px 8px -2px rgba(10, 124, 194, 0.2);
 }
 
 button#fetch_routes_btn:hover::before {
@@ -188,9 +188,9 @@ button#fetch_routes_btn:active {
   border-radius: 24px;
   border: none;
   box-shadow: 
-    0 10px 15px -3px rgba(0, 102, 204, 0.1),
-    0 20px 25px -5px rgba(0, 102, 204, 0.08),
-    0 25px 50px -12px rgba(0, 102, 204, 0.1);
+    0 10px 15px -3px rgba(10, 124, 194, 0.1),
+    0 20px 25px -5px rgba(10, 124, 194, 0.08),
+    0 25px 50px -12px rgba(10, 124, 194, 0.1);
   overflow: hidden;
   position: relative;
 }
@@ -207,7 +207,7 @@ button#fetch_routes_btn:active {
   margin-bottom: 16px;
   font-size: 22px;
   font-weight: 700;
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #075e9a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -221,7 +221,7 @@ button#fetch_routes_btn:active {
 
 #result li {
   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border-left: 4px solid #0066cc;
+  border-left: 4px solid #0a7cc2;
   border-radius: 12px;
   padding: 16px 20px;
   margin-bottom: 12px;
@@ -229,13 +229,13 @@ button#fetch_routes_btn:active {
   font-size: 15px;
   line-height: 1.6;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 102, 204, 0.05);
+  box-shadow: 0 2px 4px rgba(10, 124, 194, 0.05);
 }
 
 #result li:hover {
   background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
   transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+  box-shadow: 0 4px 12px rgba(10, 124, 194, 0.1);
 }
 
 /* Route info styling */
@@ -253,17 +253,17 @@ button#fetch_routes_btn:active {
   border-radius: 20px;
   padding: 24px;
   box-shadow: 
-    0 4px 6px -1px rgba(0, 102, 204, 0.05),
-    0 10px 15px -3px rgba(0, 102, 204, 0.08);
-  border: 1px solid rgba(0, 102, 204, 0.08);
+    0 4px 6px -1px rgba(10, 124, 194, 0.05),
+    0 10px 15px -3px rgba(10, 124, 194, 0.08);
+  border: 1px solid rgba(10, 124, 194, 0.08);
   transition: all 0.3s ease;
 }
 
 #result .route-card:hover {
   transform: translateY(-4px);
   box-shadow: 
-    0 10px 15px -3px rgba(0, 102, 204, 0.1),
-    0 20px 25px -5px rgba(0, 102, 204, 0.1);
+    0 10px 15px -3px rgba(10, 124, 194, 0.1),
+    0 20px 25px -5px rgba(10, 124, 194, 0.1);
 }
 
 /* Loading state */
@@ -273,7 +273,7 @@ button#fetch_routes_btn:active {
   justify-content: center;
   gap: 12px;
   padding: 20px;
-  color: #0066cc;
+  color: #0a7cc2;
   font-weight: 600;
 }
 
@@ -282,7 +282,7 @@ button#fetch_routes_btn:active {
   width: 24px;
   height: 24px;
   border: 3px solid #e2e8f0;
-  border-top-color: #0066cc;
+  border-top-color: #0a7cc2;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -317,7 +317,7 @@ button#fetch_routes_btn:active {
 }
 
 .dark .route-form::before {
-  background: linear-gradient(90deg, #0066cc, #06b6d4, #0066cc);
+  background: linear-gradient(90deg, #0a7cc2, #06b6d4, #0a7cc2);
 }
 
 .dark .input-group label {
@@ -370,14 +370,14 @@ button#fetch_routes_btn:active {
   max-width: 900px;
   margin: 0 auto 24px;
   padding: 20px 28px;
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 50%, #06b6d4 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #075e9a 50%, #06b6d4 100%);
   border-radius: 20px;
   color: white;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 24px;
-  box-shadow: 0 10px 25px -5px rgba(0, 102, 204, 0.3);
+  box-shadow: 0 10px 25px -5px rgba(10, 124, 194, 0.3);
 }
 
 .weather-main {
@@ -561,7 +561,7 @@ button#fetch_routes_btn:active {
 }
 
 .share-option:hover {
-  border-color: #0066cc;
+  border-color: #0a7cc2;
   background: #f0f7ff;
 }
 
@@ -614,8 +614,8 @@ button#fetch_routes_btn:active {
 }
 
 .dark .share-option:hover {
-  border-color: #0066cc;
-  background: rgba(0, 102, 204, 0.1);
+  border-color: #0a7cc2;
+  background: rgba(10, 124, 194, 0.1);
 }
 
 .dark .share-option-label {

@@ -46,7 +46,7 @@ permalink: /favoriteLocations/
     width: 40px;
     height: 40px;
     border: 4px solid #334155;
-    border-top-color: #0066cc;
+    border-top-color: #0a7cc2;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 0 auto 16px;

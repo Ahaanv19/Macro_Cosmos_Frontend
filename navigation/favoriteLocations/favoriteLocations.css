@@ -11,7 +11,7 @@
 /* Location Card */
 .location-square {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border: 2px solid rgba(0, 102, 204, 0.1);
+  border: 2px solid rgba(10, 124, 194, 0.1);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -23,8 +23,8 @@
   min-height: 160px;
   padding: 24px 16px;
   box-shadow: 
-    0 4px 6px -1px rgba(0, 102, 204, 0.05),
-    0 10px 15px -3px rgba(0, 102, 204, 0.08);
+    0 4px 6px -1px rgba(10, 124, 194, 0.05),
+    0 10px 15px -3px rgba(10, 124, 194, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   color: #1e293b;
   cursor: pointer;
@@ -39,18 +39,18 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #0066cc, #06b6d4);
+  background: linear-gradient(90deg, #0a7cc2, #06b6d4);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .location-square:hover {
   transform: translateY(-6px) scale(1.02);
-  border-color: rgba(0, 102, 204, 0.2);
+  border-color: rgba(10, 124, 194, 0.2);
   box-shadow: 
-    0 10px 15px -3px rgba(0, 102, 204, 0.1),
-    0 20px 25px -5px rgba(0, 102, 204, 0.1),
-    0 25px 50px -12px rgba(0, 102, 204, 0.15);
+    0 10px 15px -3px rgba(10, 124, 194, 0.1),
+    0 20px 25px -5px rgba(10, 124, 194, 0.1),
+    0 25px 50px -12px rgba(10, 124, 194, 0.15);
 }
 
 .location-square:hover::before {
@@ -118,7 +118,7 @@
   position: relative;
   box-shadow: 
     0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(0, 102, 204, 0.08);
+    0 0 0 1px rgba(10, 124, 194, 0.08);
   color: #1e293b;
   animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -146,7 +146,7 @@
   margin-bottom: 16px;
   font-size: 24px;
   font-weight: 700;
-  background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -179,9 +179,9 @@
 
 .popup-content input:focus {
   outline: none;
-  border-color: #0066cc;
+  border-color: #0a7cc2;
   background-color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+  box-shadow: 0 0 0 4px rgba(10, 124, 194, 0.1);
 }
 
 .dark .popup-content input {
@@ -278,7 +278,7 @@
 .popup-content .popup-edit {
   flex: 1;
   padding: 14px 24px;
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #075e9a 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -305,9 +305,9 @@
 
 .popup-content .popup-submit:hover,
 .popup-content .popup-edit:hover {
-  background: linear-gradient(135deg, #0052a3 0%, #004080 100%);
+  background: linear-gradient(135deg, #075e9a 0%, #004080 100%);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(0, 102, 204, 0.4);
+  box-shadow: 0 10px 20px -5px rgba(10, 124, 194, 0.4);
 }
 
 .popup-content .popup-submit:hover::before,
@@ -327,7 +327,7 @@
   font-weight: 600;
   font-family: inherit;
   color: white;
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #075e9a 100%);
   border: none;
   border-radius: 14px;
   cursor: pointer;
@@ -335,8 +335,8 @@
   position: relative;
   overflow: hidden;
   box-shadow: 
-    0 4px 6px -1px rgba(0, 102, 204, 0.2),
-    0 10px 15px -3px rgba(0, 102, 204, 0.15);
+    0 4px 6px -1px rgba(10, 124, 194, 0.2),
+    0 10px 15px -3px rgba(10, 124, 194, 0.15);
 }
 
 .new-location-button::before {
@@ -351,11 +351,11 @@
 }
 
 .new-location-button:hover {
-  background: linear-gradient(135deg, #0052a3 0%, #004080 100%);
+  background: linear-gradient(135deg, #075e9a 0%, #004080 100%);
   transform: translateY(-3px);
   box-shadow: 
-    0 10px 15px -3px rgba(0, 102, 204, 0.3),
-    0 20px 25px -5px rgba(0, 102, 204, 0.2);
+    0 10px 15px -3px rgba(10, 124, 194, 0.3),
+    0 20px 25px -5px rgba(10, 124, 194, 0.2);
 }
 
 .new-location-button:hover::before {

@@ -84,13 +84,13 @@ nav: true
 }
 
 .voice-toggle input:checked + span {
-  color: #0066cc;
+  color: #0a7cc2;
 }
 
 /* Navigation status bar */
 .nav-status-bar {
   display: none;
-  background: linear-gradient(135deg, #0066cc 0%, #004d99 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #004d99 100%);
   border-radius: 16px;
   padding: 16px 20px;
   margin-top: 16px;
@@ -240,24 +240,24 @@ nav: true
 }
 
 .direction-step.step-active {
-  background: linear-gradient(90deg, rgba(0, 102, 204, 0.15) 0%, rgba(0, 102, 204, 0.05) 100%);
-  border-left: 4px solid #0066cc;
+  background: linear-gradient(90deg, rgba(10, 124, 194, 0.15) 0%, rgba(10, 124, 194, 0.05) 100%);
+  border-left: 4px solid #0a7cc2;
   padding-left: 14px;
 }
 
 .direction-step.step-active .step-number-badge {
-  background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #06b6d4 100%);
   color: white;
   animation: pulse-nav 2s infinite;
 }
 
 @keyframes pulse-nav {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(0, 102, 204, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(10, 124, 194, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(10, 124, 194, 0); }
 }
 
 .direction-step.step-active .step-content .step-instruction {
-  color: #0066cc;
+  color: #0a7cc2;
   font-weight: 600;
 }
 
@@ -287,7 +287,7 @@ nav: true
   display: inline-flex;
   align-items: center;
   padding: 6px 12px;
-  background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #06b6d4 100%);
   color: white;
   font-size: 12px;
   font-weight: 700;
@@ -357,11 +357,11 @@ nav: true
 .weather-dashboard {
   max-width: 900px;
   margin: 0 auto 24px;
-  background: linear-gradient(135deg, #0066cc 0%, #004d99 40%, #003d7a 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #004d99 40%, #003d7a 100%);
   border-radius: 24px;
   padding: 0;
   overflow: hidden;
-  box-shadow: 0 20px 40px -10px rgba(0, 102, 204, 0.4), 0 10px 20px -5px rgba(0, 102, 204, 0.2);
+  box-shadow: 0 20px 40px -10px rgba(10, 124, 194, 0.4), 0 10px 20px -5px rgba(10, 124, 194, 0.2);
   position: relative;
 }
 
@@ -546,8 +546,8 @@ nav: true
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 102, 204, 0.05), 0 10px 15px -3px rgba(0, 102, 204, 0.08);
-  border: 1px solid rgba(0, 102, 204, 0.08);
+  box-shadow: 0 4px 6px -1px rgba(10, 124, 194, 0.05), 0 10px 15px -3px rgba(10, 124, 194, 0.08);
+  border: 1px solid rgba(10, 124, 194, 0.08);
 }
 
 .dark .traffic-dashboard {
@@ -561,7 +561,7 @@ nav: true
   align-items: center;
   padding: 20px 24px;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-bottom: 1px solid rgba(0, 102, 204, 0.08);
+  border-bottom: 1px solid rgba(10, 124, 194, 0.08);
 }
 
 .dark .traffic-header {
@@ -585,7 +585,7 @@ nav: true
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
-  border-bottom: 1px solid rgba(0, 102, 204, 0.08);
+  border-bottom: 1px solid rgba(10, 124, 194, 0.08);
 }
 
 .dark .traffic-stats-row { border-color: rgba(148, 163, 184, 0.1); }
@@ -593,18 +593,18 @@ nav: true
 .traffic-stat {
   padding: 20px;
   text-align: center;
-  border-right: 1px solid rgba(0, 102, 204, 0.08);
+  border-right: 1px solid rgba(10, 124, 194, 0.08);
   transition: all 0.3s ease;
 }
 
 .traffic-stat:last-child { border-right: none; }
 .dark .traffic-stat { border-color: rgba(148, 163, 184, 0.1); }
-.traffic-stat:hover { background: rgba(0, 102, 204, 0.03); }
+.traffic-stat:hover { background: rgba(10, 124, 194, 0.03); }
 
 .traffic-stat-value {
   font-size: 28px;
   font-weight: 800;
-  background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #0a7cc2 0%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -630,7 +630,7 @@ nav: true
 
 .traffic-chart-section {
   padding: 20px;
-  border-right: 1px solid rgba(0, 102, 204, 0.08);
+  border-right: 1px solid rgba(10, 124, 194, 0.08);
 }
 
 .traffic-chart-section:last-child { border-right: none; }
@@ -687,7 +687,7 @@ nav: true
 .peak-hour-bar {
   height: 100%;
   border-radius: 12px;
-  background: linear-gradient(90deg, #0066cc, #06b6d4);
+  background: linear-gradient(90deg, #0a7cc2, #06b6d4);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -787,12 +787,12 @@ nav: true
   .weather-details-grid { grid-template-columns: repeat(2, 1fr); padding: 16px; gap: 12px; }
 
   .traffic-stats-row { grid-template-columns: repeat(2, 1fr); }
-  .traffic-stat { border-bottom: 1px solid rgba(0, 102, 204, 0.08); }
+  .traffic-stat { border-bottom: 1px solid rgba(10, 124, 194, 0.08); }
   .traffic-stat:nth-child(2) { border-right: none; }
   .traffic-charts { grid-template-columns: 1fr; }
   .traffic-chart-section {
     border-right: none;
-    border-bottom: 1px solid rgba(0, 102, 204, 0.08);
+    border-bottom: 1px solid rgba(10, 124, 194, 0.08);
   }
   .traffic-chart-section:last-child { border-bottom: none; }
 }
@@ -994,7 +994,7 @@ nav: true
 
 <!-- Share Route Button -->
 <div id="share-route-container" style="display: none; margin-top: 20px; text-align: center;">
-  <button id="share-route-btn" type="button" onclick="openShareModal()" style="background: linear-gradient(135deg, #0066cc 0%, #06b6d4 100%); color: white; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);">
+  <button id="share-route-btn" type="button" onclick="openShareModal()" style="background: linear-gradient(135deg, #0a7cc2 0%, #06b6d4 100%); color: white; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(10, 124, 194, 0.3);">
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px;">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
     </svg>
@@ -1171,8 +1171,8 @@ function initHourlyChart() {
       labels: ['12a','','','3a','','','6a','','','9a','','','12p','','','3p','','','6p','','','9p','',''],
       datasets: [{
         data: [15,18,25,45,72,88,92,85,65,48,52,58,62,55,68,82,95,88,72,55,42,35,28,18],
-        borderColor: '#0066cc',
-        backgroundColor: 'rgba(0,102,204,0.1)',
+        borderColor: '#0a7cc2',
+        backgroundColor: 'rgba(10, 124, 194,0.1)',
         borderWidth: 2,
         fill: true,
         tension: 0.4,
@@ -1242,7 +1242,7 @@ function openShareModal() {
     if (qr) {
       qr.innerHTML = '';
       // eslint-disable-next-line no-new
-      new QRCode(qr, { text: generateShareUrl(), width: 150, height: 150, colorDark: '#0066cc' });
+      new QRCode(qr, { text: generateShareUrl(), width: 150, height: 150, colorDark: '#0a7cc2' });
     }
   }
 }

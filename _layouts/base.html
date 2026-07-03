@@ -34,28 +34,28 @@
           colors: {
             // San Diego inspired color palette
             primary: {
-              50: '#eef6fb',
-              100: '#d8e9f7',
-              200: '#b4d2eb',
-              300: '#81b0d8',
-              400: '#4f8fc4',
-              500: '#0f5c99',
-              600: '#0d4f84',
-              700: '#0b416c',
-              800: '#083353',
-              900: '#052239',
+              50: '#ecf5fd',
+              100: '#d1eafb',
+              200: '#a6d6f3',
+              300: '#6bbde8',
+              400: '#2c9bd6',
+              500: '#0a7cc2',
+              600: '#0968ab',
+              700: '#08527f',
+              800: '#073f63',
+              900: '#052b45',
             },
             secondary: {
-              50: '#fef7ef',
-              100: '#fce8d1',
-              200: '#f7cea2',
-              300: '#efae6d',
-              400: '#e18c43',
-              500: '#c56d24',
-              600: '#a9551a',
-              700: '#8a4518',
-              800: '#703819',
-              900: '#5a2f18',
+              50: '#fff4ec',
+              100: '#ffe1cd',
+              200: '#ffbf97',
+              300: '#fb975b',
+              400: '#f4712c',
+              500: '#e35418',
+              600: '#c4420e',
+              700: '#a1350e',
+              800: '#822c12',
+              900: '#692613',
             },
             accent: {
               50: '#effaf8',
@@ -81,7 +81,7 @@
             'soft': '0 12px 30px -24px rgba(8, 26, 46, 0.35), 0 2px 10px rgba(8, 26, 46, 0.06)',
             'medium': '0 20px 45px -28px rgba(8, 26, 46, 0.38), 0 10px 22px -18px rgba(8, 26, 46, 0.2)',
             'large': '0 32px 70px -36px rgba(8, 26, 46, 0.45), 0 18px 32px -24px rgba(8, 26, 46, 0.22)',
-            'glow': '0 18px 40px -24px rgba(15, 92, 153, 0.45)',
+            'glow': '0 18px 40px -24px rgba(10, 124, 194, 0.45)',
             'glow-accent': '0 20px 44px -26px rgba(17, 138, 136, 0.38)',
           },
           borderRadius: {
@@ -160,7 +160,7 @@
     }
 
     ::selection {
-      background-color: #0066cc;
+      background-color: #0a7cc2;
       color: white;
     }
 
@@ -173,13 +173,13 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #0066cc, #0891b2);
+      background: linear-gradient(180deg, #0a7cc2, #0891b2);
       border-radius: 10px;
       border: 2px solid #f1f5f9;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, #0052a3, #0e7490);
+      background: linear-gradient(180deg, #075e9a, #0e7490);
     }
 
     .dark ::-webkit-scrollbar-track {
@@ -282,7 +282,7 @@
 
     /* Gradient text */
     .gradient-text {
-      background: linear-gradient(135deg, #0066cc 0%, #06b6d4 50%, #0066cc 100%);
+      background: linear-gradient(135deg, #0a7cc2 0%, #12b0cc 42%, #f0793c 100%);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -297,12 +297,12 @@
 
     .card-hover:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 40px -15px rgba(0, 102, 204, 0.2);
+      box-shadow: 0 20px 40px -15px rgba(10, 124, 194, 0.2);
     }
 
     /* Button styles */
     .btn-primary {
-      background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+      background: linear-gradient(135deg, #0a7cc2 0%, #075e9a 100%);
       transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -325,7 +325,7 @@
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px -10px rgba(0, 102, 204, 0.5);
+      box-shadow: 0 10px 30px -10px rgba(10, 124, 194, 0.5);
     }
 
     /* Animated underline for nav links */
@@ -340,7 +340,7 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, #0066cc, #06b6d4);
+      background: linear-gradient(90deg, #0a7cc2, #06b6d4);
       transition: width 0.3s ease;
       border-radius: 2px;
     }
@@ -356,14 +356,14 @@
 
     /* ===== WEATHER WIDGET STYLES ===== */
     .weather-widget {
-      background: linear-gradient(135deg, #0066cc 0%, #0891b2 100%);
+      background: linear-gradient(135deg, #0a7cc2 0%, #0891b2 100%);
       border-radius: 1rem;
       padding: 1rem 1.25rem;
       color: white;
       display: flex;
       align-items: center;
       gap: 1rem;
-      box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+      box-shadow: 0 4px 15px rgba(10, 124, 194, 0.3);
     }
 
     .weather-icon {
@@ -475,7 +475,7 @@
 
     /* Focus styles for accessibility */
     *:focus-visible {
-      outline: 2px solid #0066cc;
+      outline: 2px solid #0a7cc2;
       outline-offset: 2px;
       border-radius: 4px;
     }
@@ -890,7 +890,7 @@
   <style>
     .site-body {
       background:
-        radial-gradient(circle at 12% 12%, rgba(15, 92, 153, 0.14), transparent 28%),
+        radial-gradient(circle at 12% 12%, rgba(10, 124, 194, 0.14), transparent 28%),
         radial-gradient(circle at 86% 18%, rgba(17, 138, 136, 0.12), transparent 24%),
         radial-gradient(circle at 50% 100%, rgba(197, 109, 36, 0.08), transparent 28%),
         linear-gradient(180deg, #f4f7fb 0%, #fbfdff 52%, #eef3f8 100%);
@@ -900,7 +900,7 @@
 
     .dark .site-body {
       background:
-        radial-gradient(circle at 15% 18%, rgba(15, 92, 153, 0.22), transparent 24%),
+        radial-gradient(circle at 15% 18%, rgba(10, 124, 194, 0.22), transparent 24%),
         radial-gradient(circle at 82% 16%, rgba(17, 138, 136, 0.18), transparent 22%),
         linear-gradient(180deg, #08111d 0%, #0b1320 46%, #0f1726 100%);
       color: #e2e8f0;
@@ -934,15 +934,15 @@
     }
 
     .site-utilitybar {
-      background: linear-gradient(90deg, #083353 0%, #0b416c 100%);
-      color: #d8e9f7;
-      border-bottom: 1px solid rgba(15, 92, 153, 0.5);
+      background: linear-gradient(90deg, #073f63 0%, #08527f 100%);
+      color: #d1eafb;
+      border-bottom: 1px solid rgba(10, 124, 194, 0.5);
       letter-spacing: 0.01em;
     }
 
     .dark .site-utilitybar {
       background: linear-gradient(90deg, #04121f 0%, #072036 100%);
-      color: #b4d2eb;
+      color: #a6d6f3;
       border-bottom-color: rgba(148, 163, 184, 0.12);
     }
 
@@ -970,7 +970,7 @@
     }
 
     .site-brand-mark {
-      box-shadow: 0 20px 38px -24px rgba(15, 92, 153, 0.62);
+      box-shadow: 0 20px 38px -24px rgba(10, 124, 194, 0.62);
     }
 
     .site-brand-subtitle {
@@ -1001,8 +1001,8 @@
     }
 
     .shell-nav-link:hover {
-      color: #0f5c99;
-      background: rgba(15, 92, 153, 0.08);
+      color: #0a7cc2;
+      background: rgba(10, 124, 194, 0.08);
     }
 
     .dark .shell-nav-link {
@@ -1011,7 +1011,7 @@
 
     .dark .shell-nav-link:hover {
       color: #7cc2d5;
-      background: rgba(15, 92, 153, 0.16);
+      background: rgba(10, 124, 194, 0.16);
     }
 
     .nav-link::after {
@@ -1021,14 +1021,14 @@
     .shell-primary-action,
     .btn-primary {
       border-radius: 1rem;
-      background: linear-gradient(135deg, #0f5c99 0%, #0b416c 100%);
-      box-shadow: 0 18px 34px -24px rgba(15, 92, 153, 0.58);
+      background: linear-gradient(135deg, #0a7cc2 0%, #08527f 100%);
+      box-shadow: 0 18px 34px -24px rgba(10, 124, 194, 0.58);
     }
 
     .shell-primary-action:hover,
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 24px 42px -28px rgba(15, 92, 153, 0.65);
+      box-shadow: 0 24px 42px -28px rgba(10, 124, 194, 0.65);
     }
 
     .btn-primary::before {
@@ -1191,7 +1191,7 @@
       background-clip: border-box;
       -webkit-background-clip: border-box;
       -webkit-text-fill-color: currentColor;
-      color: #0b416c;
+      color: #08527f;
       animation: none;
     }
 
@@ -1201,7 +1201,7 @@
 
     .card-hover:hover {
       transform: translateY(-6px);
-      box-shadow: 0 30px 46px -32px rgba(15, 92, 153, 0.38);
+      box-shadow: 0 30px 46px -32px rgba(10, 124, 194, 0.38);
     }
 
     .site-main .hero-gradient {
@@ -1218,7 +1218,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at top left, rgba(15, 92, 153, 0.12), transparent 28%),
+        radial-gradient(circle at top left, rgba(10, 124, 194, 0.12), transparent 28%),
         radial-gradient(circle at bottom right, rgba(17, 138, 136, 0.1), transparent 24%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
       pointer-events: none;
@@ -1232,7 +1232,7 @@
 
     .dark .site-main .hero-gradient::before {
       background:
-        radial-gradient(circle at top left, rgba(15, 92, 153, 0.24), transparent 26%),
+        radial-gradient(circle at top left, rgba(10, 124, 194, 0.24), transparent 26%),
         radial-gradient(circle at bottom right, rgba(17, 138, 136, 0.18), transparent 22%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
     }
@@ -1289,8 +1289,8 @@
     .site-main input:focus,
     .site-main textarea:focus,
     .site-main select:focus {
-      border-color: rgba(15, 92, 153, 0.72);
-      box-shadow: 0 0 0 4px rgba(15, 92, 153, 0.12), 0 18px 30px -24px rgba(15, 92, 153, 0.34);
+      border-color: rgba(10, 124, 194, 0.72);
+      box-shadow: 0 0 0 4px rgba(10, 124, 194, 0.12), 0 18px 30px -24px rgba(10, 124, 194, 0.34);
     }
 
     .site-main button[type="submit"],
@@ -1347,14 +1347,14 @@
     }
 
     .site-main th {
-      background: rgba(15, 92, 153, 0.08);
-      color: #0b416c;
+      background: rgba(10, 124, 194, 0.08);
+      color: #08527f;
       font-weight: 700;
       text-align: left;
     }
 
     .dark .site-main th {
-      background: rgba(15, 92, 153, 0.16);
+      background: rgba(10, 124, 194, 0.16);
       color: #e2e8f0;
     }
 

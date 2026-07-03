@@ -44,7 +44,7 @@ menu: nav/home.html
   <style>
     /* Hero gradient overlay */
     .hero-gradient {
-      background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(6, 182, 212, 0.05) 50%, rgba(0, 102, 204, 0.05) 100%);
+      background: linear-gradient(135deg, rgba(10, 124, 194, 0.05) 0%, rgba(6, 182, 212, 0.05) 50%, rgba(10, 124, 194, 0.05) 100%);
     }
 
     #map {
@@ -52,7 +52,7 @@ menu: nav/home.html
       margin-top: 20px;
       border-radius: 24px;
       border: none;
-      box-shadow: 0 25px 50px -12px rgba(0, 102, 204, 0.15);
+      box-shadow: 0 25px 50px -12px rgba(10, 124, 194, 0.15);
       overflow: hidden;
     }
 
@@ -477,7 +477,7 @@ menu: nav/home.html
     }
 
     .faq-question:hover {
-      border-color: #0066cc;
+      border-color: #0a7cc2;
     }
 
     .faq-question.active {
