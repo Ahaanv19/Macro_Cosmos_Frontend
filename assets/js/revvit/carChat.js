@@ -25,6 +25,7 @@ async function sendMessage() {
     mode: "cors", // no-cors, *cors, same-origin
     credentials: "include", // include, same-origin, omit
     headers: {
+      ...fetchOptions.headers, // includes Authorization (PWA cookie fallback)
       "Content-Type": "application/json",
       "X-Origin": "client", // New custom header to identify source
     },

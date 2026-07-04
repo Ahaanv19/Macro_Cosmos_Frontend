@@ -195,8 +195,8 @@ menu: nav/home.html
       // Verify the Stripe session and activate subscription (GET request with credentials)
       const baseUrl = pythonURI.endsWith('/') ? pythonURI.slice(0, -1) : pythonURI;
       const verifyResponse = await fetch(`${baseUrl}/api/stripe/verify?session_id=${sessionId}`, {
-        method: 'GET',
-        credentials: 'include'
+        ...fetchOptions,     // credentials + Authorization (PWA cookie fallback)
+        method: 'GET'
       });
       
       if (!verifyResponse.ok) {

@@ -593,9 +593,8 @@ document.getElementById('incidentForm').addEventListener('submit', async (e) => 
 
   try {
     const res = await fetch(`${pythonURI}/api/incidents`, {
+      ...fetchOptions,       // credentials + Authorization (PWA cookie fallback)
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
       body: JSON.stringify({ location, type, details })
     });
 

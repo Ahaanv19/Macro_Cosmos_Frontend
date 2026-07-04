@@ -831,9 +831,8 @@ document.getElementById('fetch_routes_btn').addEventListener('click', async () =
 
   try {
     const response = await fetch(apiUrl, {
+      ...fetchOptions,        // includes credentials + Authorization (PWA cookie fallback)
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',  // Required for authentication
       body: JSON.stringify({ origin, destination, mode }),
     });
 

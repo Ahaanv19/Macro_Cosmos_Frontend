@@ -80,14 +80,18 @@ nav: true
   <script type="module">
     const API_BASE = 'https://autonomous.opencodingsociety.com/api';
 
+    // Include the stored Bearer token so this works in an installed PWA where
+    // the cross-site cookie is blocked (cookie stays primary on the website).
+    const _mcToken = (function () { try { return localStorage.getItem('mc_jwt'); } catch (e) { return null; } })();
     const fetchOptions = {
       method: 'GET',
       mode: 'cors',
       cache: 'default',
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers: Object.assign(
+        { 'Content-Type': 'application/json' },
+        _mcToken ? { 'Authorization': 'Bearer ' + _mcToken } : {}
+      )
     };
 
     const form = document.getElementById('entryForm');
