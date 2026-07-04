@@ -1,4 +1,4 @@
-import {fetchOptions, pythonURI } from './config.js';
+import {fetchOptions, pythonURI, clearAuthToken } from './config.js';
 
 
 
@@ -112,6 +112,7 @@ export async function logoutUser() {
          
         try {
                 const response = await fetch(URL, options);
+                clearAuthToken(); // drop the stored Bearer token (PWA fallback)
                 if (response.ok) {
                     window.location.href = "/login"; // Redirect to login page
                 } else {

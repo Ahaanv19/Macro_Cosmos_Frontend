@@ -245,6 +245,39 @@ menu: nav/home.html
       backdrop-filter: blur(10px);
     }
 
+    /* Mobile: the callouts are absolutely positioned at fixed corners, which
+       collide on a narrow phone screen. Below 600px, reflow the whole card into
+       a clean vertical stack. The desktop layout above is left untouched. */
+    @media (max-width: 600px) {
+      .hero-route-display {
+        min-height: 0;
+        padding: 1.1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .hero-route-svg { opacity: 0.35; }
+      .hero-pulse { display: none; }
+      .hero-route-metric,
+      .hero-callout,
+      .hero-status-strip {
+        position: static;
+        inset: auto;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+      }
+      .hero-route-metric { align-self: flex-start; }
+      .hero-callout {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        margin: 0;
+        animation: none;
+      }
+    }
+
     @keyframes routeFlow {
       from { stroke-dashoffset: 190; }
       to { stroke-dashoffset: 0; }

@@ -127,7 +127,7 @@ search_exclude: true
 </section>
 
 <script type="module">
-  import { login, pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+  import { login, pythonURI, fetchOptions, setAuthToken } from '{{site.baseurl}}/assets/js/api/config.js';
   import { startAuthentication } from 'https://cdn.jsdelivr.net/npm/@simplewebauthn/browser@10.0.0/+esm';
 
   // Passwordless / biometric sign-in via WebAuthn passkey.
@@ -145,6 +145,7 @@ search_exclude: true
       const compR = await fetch(`${pythonURI}/api/webauthn/login/complete`, { ...fetchOptions, method: 'POST', body: JSON.stringify({ credential: assertion, challenge_token: challengeToken }) });
       const data = await compR.json();
       if (!compR.ok) throw new Error(data.error || 'Passkey login failed');
+      if (data && data.token) setAuthToken(data.token); // PWA cookie fallback
       window.location.href = '{{site.baseurl}}/profile';
     } catch (e) {
       if (msg) msg.textContent = (e && e.message) ? e.message : 'Passkey login was cancelled.';

@@ -27,6 +27,31 @@ export const fetchOptions = {
 };
 
 /**
+ * Auth token fallback for environments that block cross-site cookies — most
+ * notably an installed iOS PWA (standalone), where the SameSite=None JWT cookie
+ * is dropped. We store the token from login in localStorage and send it as an
+ * Authorization: Bearer header on every backend request. The httponly cookie
+ * stays primary for the website, so its behavior is unchanged; this header is a
+ * harmless addition the backend accepts as a fallback.
+ */
+export function setAuthToken(token) {
+    try {
+        if (!token) return;
+        localStorage.setItem('mc_jwt', token);
+        fetchOptions.headers['Authorization'] = 'Bearer ' + token;
+    } catch (e) { /* storage unavailable — cookie path still works */ }
+}
+export function clearAuthToken() {
+    try { localStorage.removeItem('mc_jwt'); } catch (e) {}
+    delete fetchOptions.headers['Authorization'];
+}
+// Restore the header on page load so authenticated requests carry it.
+try {
+    const _savedToken = localStorage.getItem('mc_jwt');
+    if (_savedToken) fetchOptions.headers['Authorization'] = 'Bearer ' + _savedToken;
+} catch (e) { /* ignore */ }
+
+/**
  * Escape untrusted text before inserting it into HTML via innerHTML.
  * Use this for ANY value that originates from the API or user input.
  * For attribute contexts, this also neutralizes quotes.
@@ -86,7 +111,15 @@ export function login(options) {
         });
 
         const handle = (response) => {
-                if (response.ok) { options.callback(); return; }
+                if (response.ok) {
+                        // Persist the token (fallback for cookie-blocked PWAs) before
+                        // continuing into the app, then run the original callback.
+                        response.json().catch(() => ({})).then((data) => {
+                                if (data && data.token) setAuthToken(data.token);
+                                options.callback();
+                        });
+                        return;
+                }
                 return response.json().catch(() => ({})).then((data) => {
                         // 2FA required and a passkey exists -> automatically start
                         // the passkey (biometric) flow instead of making the user
