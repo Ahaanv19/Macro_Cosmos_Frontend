@@ -20,6 +20,27 @@
 
   <title>{{ page.title | default: "Macro Cosmos" }} | San Diego &amp; the Bay Area</title>
 
+  <!-- PWA: installable app (manifest, theme color, iOS/Android icons) -->
+  <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
+  <meta name="theme-color" content="#0a7cc2">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Macro Cosmos">
+  <link rel="apple-touch-icon" href="{{ site.baseurl }}/assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/assets/icons/favicon-32.png">
+  <script>
+    // Register the service worker (installability + offline fallback). Fails
+    // silently on unsupported browsers; never blocks page load.
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker
+          .register('{{ site.baseurl }}/sw.js', { scope: '{{ site.baseurl }}/' })
+          .catch(function () {});
+      });
+    }
+  </script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
