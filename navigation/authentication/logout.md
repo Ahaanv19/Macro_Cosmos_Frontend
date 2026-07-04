@@ -6,27 +6,24 @@ search_exclude: true
 ---
 
 <script type="module">
-    import { fetchOptions, pythonURI } from '{{site.baseurl}}/assets/js/api/config.js';
-    const URL = pythonURI + '/api/authenticate'; // Assuming pythonURI is defined elsewhere
+    import { fetchOptions, pythonURI, clearAuthToken } from '{{site.baseurl}}/assets/js/api/config.js';
+    const URL = pythonURI + '/api/authenticate';
     const options = {
-        ...fetchOptions, // Assuming fetchOptions is defined elsewhere and includes necessary headers, etc.
+        ...fetchOptions, // includes credentials + Authorization (Bearer) so the DELETE is authenticated
         method: 'DELETE',
     };
     console.log('Logout clicked');
 
+    // Call the endpoint to expire the server cookie, then ALWAYS clear the local
+    // Bearer token and redirect — even if the request fails — so the user is
+    // genuinely logged out. (Without clearing the token, the backend would keep
+    // accepting it and the user would stay logged in.)
     fetch(URL, options)
-        .then(response => {
-            if (response.ok) {
-                window.location.href = "{{site.baseurl}}/login";
-                // Successfully called the logout endpoint, now redirect to the current page
-            } else {
-                // Handle response not ok (e.g., display an error message)
-                console.error('Logout failed:', response.statusText);
-            }
-        })
-        .catch(error => {
-            // Handle any errors that occurred during the fetch
-            console.error('Error during logout:', error);
+        .then(response => { if (!response.ok) console.error('Logout failed:', response.statusText); })
+        .catch(error => { console.error('Error during logout:', error); })
+        .finally(() => {
+            clearAuthToken();
+            window.location.href = "{{site.baseurl}}/login";
         });
 
 </script>

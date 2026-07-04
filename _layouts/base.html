@@ -730,6 +730,22 @@
                 }
                 if (mLogout) { mLogout.classList.remove('hidden'); mLogout.classList.add('flex'); }
 
+                // Show the user's profile picture (if set) in the nav pill instead
+                // of their name. Same button/link behavior — only the contents
+                // change. Falls back to the name above if there's no picture, so
+                // nothing breaks for users without one.
+                try {
+                  const _pfpResp = await fetch(`${pythonURI}/api/id/pfp`, fetchOptions);
+                  if (_pfpResp.ok) {
+                    const _pfp = await _pfpResp.json();
+                    if (_pfp && _pfp.pfp) {
+                      const _src = 'data:image/jpeg;base64,' + _pfp.pfp;
+                      button.innerHTML = '<img src="' + _src + '" alt="Profile picture" style="width:30px;height:30px;border-radius:9999px;object-fit:cover;display:block;" />';
+                      if (mSignInText) mSignInText.innerHTML = '<img src="' + _src + '" alt="Profile picture" style="width:26px;height:26px;border-radius:9999px;object-fit:cover;display:inline-block;vertical-align:middle;" />';
+                    }
+                  }
+                } catch (e) { /* no picture -> keep the name, non-breaking */ }
+
                 // Show the Business Portal link for business (and admin) accounts.
                 if (currentUser.role === 'Business' || currentUser.role === 'Admin') {
                   document.getElementById('business-nav-link')?.classList.remove('hidden');
