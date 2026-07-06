@@ -13,30 +13,39 @@ categories: [About/Ideation]
   <h1>About Macro Cosmos</h1>
 
   <p>
-    <strong>Macro Cosmos</strong> is an intelligent, community-driven navigation platform created to enhance commuting experiences across California — San Diego County and the San Francisco Bay Area (San Francisco and Alameda County, including Oakland and Berkeley).
-    Whether you're headed to school, work, or anywhere in between, Macro Cosmos helps you travel smarter by combining real-time traffic data,
-    AI-powered route suggestions, and live community hazard reports.
+    <strong>Macro Cosmos is the only navigation platform built specifically for San Diego and the San Francisco Bay Area</strong> —
+    powered by the people who actually live and drive here. Instead of trying to out-map Google, Waze, or Apple, we focus on
+    what those apps overlook: hyperlocal traffic knowledge, real-time community reports, and the local businesses along your route.
   </p>
+
+  <blockquote style="border-left:4px solid #0a7cc2; background:rgba(10,124,194,0.06); padding:1rem 1.25rem; border-radius:0 12px 12px 0; margin:1.5rem 0; font-size:1.05rem;">
+    <strong>Our one-liner:</strong> Macro Cosmos is the navigation app that puts <em>local knowledge and local community</em> first —
+    for the commuters, parents, and neighbors of San Diego, San Francisco, Oakland, and Berkeley.
+  </blockquote>
+
+  <h2>Why not just use Google Maps?</h2>
+  <p>
+    You can — for the fastest freeway route, the giants are hard to beat, and we're not trying to reinvent that. But those apps
+    are built for the whole planet, so they treat every city the same and skip the details that matter to a neighborhood: which
+    streets flood, where the school-zone slowdowns hit, the hazard a neighbor flagged this morning, or the local coffee shop worth
+    a two-minute detour. Macro Cosmos is built around <em>local</em> knowledge and community input — exactly the things a
+    billion-dollar global map has no reason to prioritize for your block.
+  </p>
+
+  <h2>What makes us different</h2>
+  <ul>
+    <li><strong>Hyperlocal intelligence:</strong> tuned to San Diego, San Francisco, and Alameda streets, hazards, and routes — not a generic global model.</li>
+    <li><strong>Community-powered:</strong> real drivers report accidents, hazards, and delays as they happen, so the map reflects <em>your</em> streets right now.</li>
+    <li><strong>Local business discovery:</strong> we surface and support the small businesses along your route — something the big apps have no reason to do for your community.</li>
+    <li><strong>Predictive, traffic-aware routing:</strong> adjusts before congestion builds, using official San Diego, San Francisco, and Alameda open data.</li>
+  </ul>
 
   <h2>Our Mission</h2>
   <p>
-    Our mission is to reduce traffic frustration and improve road safety by delivering precise, adaptive, and sustainable navigation tools for everyday commuters.
-    We believe technology should respond to local needs — and that starts with empowering communities across California to co-create solutions that work for them.
+    Reduce traffic frustration and improve road safety by giving everyday commuters navigation tools that actually understand their
+    community. We believe technology should respond to local needs — and that the people who drive these streets every day know
+    them better than any algorithm built for the entire globe. Macro Cosmos turns that local knowledge into a smarter commute.
   </p>
-
-  <h2>Why California?</h2>
-  <p>
-    San Diego and the Bay Area are fast-growing regions with unique traffic patterns, school zones, and commuting demands. Existing apps often ignore local nuances — that's why we built
-    a platform tailored to local data, user input, and real-world road conditions in each community we serve.
-  </p>
-
-  <h2>What Makes Macro Cosmos Different?</h2>
-  <ul>
-    <li><strong>Hyperlocal Intelligence:</strong> Focused on San Diego, San Francisco, and Alameda streets, hazards, and routes</li>
-    <li><strong>Community Reporting:</strong> Drivers can report accidents, hazards, or delays in real time</li>
-    <li><strong>Smart Scheduling:</strong> Personalized routines to match your daily travel habits</li>
-    <li><strong>Predictive Routing:</strong> Uses AI to avoid traffic before it builds up</li>
-  </ul>
 
   <h2>Who We Are</h2>
   <p>

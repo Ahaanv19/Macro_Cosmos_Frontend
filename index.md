@@ -906,26 +906,32 @@ menu: nav/home.html
           </div>
 
           <!-- Feature 4 -->
-          <div class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
+          <a href="{{site.baseurl}}/hazard/" class="group block bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700 transition duration-300 hover:-translate-y-1 hover:shadow-medium hover:border-primary-300 dark:hover:border-primary-600">
             <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white mb-6 shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Hazard Reporting</h3>
-            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Report road hazards and help keep California's streets safe for everyone.</p>
-          </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Community Hazard Reports</h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Real drivers flag accidents, hazards, and delays as they happen — so the map reflects your streets right now, not last month.</p>
+            <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 dark:text-primary-400">Report a hazard
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </span>
+          </a>
 
           <!-- Feature 5 -->
-          <div class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
+          <a href="{{site.baseurl}}/localbusinesses/" class="group block bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700 transition duration-300 hover:-translate-y-1 hover:shadow-medium hover:border-accent-300 dark:hover:border-accent-600">
             <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center text-white mb-6 shadow-lg">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
             </div>
             <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Local Business Discovery</h3>
-            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Discover and support local businesses along your routes.</p>
-          </div>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">See and support the small businesses right along your route — the local spots the big map apps have no reason to show you.</p>
+            <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-400">Explore local businesses
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </span>
+          </a>
 
           <!-- Feature 6 -->
           <div class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-soft border border-slate-100 dark:border-slate-700">
